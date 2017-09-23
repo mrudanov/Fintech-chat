@@ -1,0 +1,17 @@
+## Other
+*.xccheckout
+*.xcscmblueprint
+
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+xcuserdata/
+
+## Other
+*.xccheckout
+*.xcscmblueprint
+
+## OS X
+*.DS_Store
