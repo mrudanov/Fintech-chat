@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		745A81081F781B350069D54A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A81071F781B350069D54A /* RoundedButton.swift */; };
 		74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AC1B681F7700B400AC6152 /* AppDelegate.swift */; };
 		74AC1B711F7700B400AC6152 /* Fintech_Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74AC1B6F1F7700B400AC6152 /* Fintech_Chat.xcdatamodeld */; };
 		74AC1B731F7700B400AC6152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B721F7700B400AC6152 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		745A81071F781B350069D54A /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		74AC1B651F7700B400AC6152 /* Fintech Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fintech Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74AC1B681F7700B400AC6152 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74AC1B701F7700B400AC6152 /* Fintech_Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fintech_Chat.xcdatamodel; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				74AC1B681F7700B400AC6152 /* AppDelegate.swift */,
 				74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */,
 				74AC1B7D1F77A6FE00AC6152 /* Profile.storyboard */,
+				745A81071F781B350069D54A /* RoundedButton.swift */,
 				74AC1B721F7700B400AC6152 /* Assets.xcassets */,
 				74AC1B811F77A78500AC6152 /* Media.xcassets */,
 				74AC1B741F7700B400AC6152 /* LaunchScreen.storyboard */,
@@ -146,6 +149,7 @@
 				74AC1B801F77A76500AC6152 /* ProfileViewController.swift in Sources */,
 				74AC1B711F7700B400AC6152 /* Fintech_Chat.xcdatamodeld in Sources */,
 				74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */,
+				745A81081F781B350069D54A /* RoundedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +285,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "mrudanov.Fintech-Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -296,7 +300,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "mrudanov.Fintech-Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

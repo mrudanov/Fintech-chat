@@ -9,16 +9,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="uxH-sq-Lfl">
             <objects>
-                <viewController id="DDM-4a-2UZ" sceneMemberID="viewController">
+                <viewController id="DDM-4a-2UZ" customClass="ProfileViewController" customModule="Fintech_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MDu-P7-HyC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TFS Student" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmY-1f-Sa5">
-                                <rect key="frame" x="164" y="50" width="195" height="22"/>
+                                <rect key="frame" x="164" y="70" width="195" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="KTR-hm-NWh"/>
                                 </constraints>
@@ -27,34 +27,58 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="L2k-Hx-Dnx">
-                                <rect key="frame" x="16" y="174" width="343" height="30"/>
+                                <rect key="frame" x="16" y="194" width="343" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6b-sr-dMS">
-                                        <rect key="frame" x="0.0" y="0.0" width="151.5" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6b-sr-dMS" customClass="RoundedButton" customModule="Fintech_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="151.5" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Изменить">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXH-Pd-EL1">
-                                        <rect key="frame" x="191.5" y="0.0" width="151.5" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXH-Pd-EL1" customClass="RoundedButton" customModule="Fintech_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="191.5" y="0.0" width="151.5" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Подробнее">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="8oh-Co-RUo"/>
+                                    <constraint firstAttribute="height" constant="40" id="8oh-Co-RUo"/>
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="Wn8-ji-2jx">
-                                <rect key="frame" x="16" y="20" width="128" height="128"/>
+                                <rect key="frame" x="16" y="40" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="Log-2b-ALT"/>
                                     <constraint firstAttribute="height" constant="128" id="V8N-eX-iFc"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Михаил Руданов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QdO-gd-Vdf">
-                                <rect key="frame" x="164" y="20" width="195" height="22"/>
+                                <rect key="frame" x="164" y="40" width="195" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="SoF-rp-rRc"/>
                                 </constraints>
@@ -68,9 +92,9 @@
                             <constraint firstItem="s0B-wp-7Jb" firstAttribute="trailing" secondItem="RmY-1f-Sa5" secondAttribute="trailing" constant="16" id="2nS-Ba-K6D"/>
                             <constraint firstItem="L2k-Hx-Dnx" firstAttribute="leading" secondItem="s0B-wp-7Jb" secondAttribute="leading" constant="16" id="4e5-wg-2ig"/>
                             <constraint firstItem="RmY-1f-Sa5" firstAttribute="top" secondItem="QdO-gd-Vdf" secondAttribute="bottom" constant="8" id="5Jg-LE-GtX"/>
-                            <constraint firstItem="QdO-gd-Vdf" firstAttribute="top" secondItem="s0B-wp-7Jb" secondAttribute="top" id="9BF-FU-mPy"/>
+                            <constraint firstItem="QdO-gd-Vdf" firstAttribute="top" secondItem="s0B-wp-7Jb" secondAttribute="top" constant="20" id="9BF-FU-mPy"/>
                             <constraint firstItem="L2k-Hx-Dnx" firstAttribute="top" secondItem="Wn8-ji-2jx" secondAttribute="bottom" constant="26" id="KQk-Ta-7KA"/>
-                            <constraint firstItem="Wn8-ji-2jx" firstAttribute="top" secondItem="s0B-wp-7Jb" secondAttribute="top" id="NaR-0Y-iqx"/>
+                            <constraint firstItem="Wn8-ji-2jx" firstAttribute="top" secondItem="s0B-wp-7Jb" secondAttribute="top" constant="20" id="NaR-0Y-iqx"/>
                             <constraint firstItem="RmY-1f-Sa5" firstAttribute="leading" secondItem="Wn8-ji-2jx" secondAttribute="trailing" constant="20" id="Quh-qT-liZ"/>
                             <constraint firstItem="QdO-gd-Vdf" firstAttribute="leading" secondItem="Wn8-ji-2jx" secondAttribute="trailing" constant="20" id="W7U-Ab-SMU"/>
                             <constraint firstItem="Wn8-ji-2jx" firstAttribute="leading" secondItem="s0B-wp-7Jb" secondAttribute="leading" constant="16" id="dGI-jG-jkD"/>
@@ -79,6 +103,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="s0B-wp-7Jb"/>
                     </view>
+                    <connections>
+                        <outlet property="avatarImage" destination="Wn8-ji-2jx" id="cuv-fF-zkh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qlc-bf-CYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
