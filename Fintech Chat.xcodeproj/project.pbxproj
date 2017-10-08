@@ -13,9 +13,13 @@
 		74AC1B711F7700B400AC6152 /* Fintech_Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74AC1B6F1F7700B400AC6152 /* Fintech_Chat.xcdatamodeld */; };
 		74AC1B731F7700B400AC6152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B721F7700B400AC6152 /* Assets.xcassets */; };
 		74AC1B761F7700B400AC6152 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B741F7700B400AC6152 /* LaunchScreen.storyboard */; };
-		74AC1B7E1F77A6FE00AC6152 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B7D1F77A6FE00AC6152 /* Profile.storyboard */; };
+		74AC1B7E1F77A6FE00AC6152 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B7D1F77A6FE00AC6152 /* Chat.storyboard */; };
 		74AC1B801F77A76500AC6152 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */; };
 		74AC1B821F77A78500AC6152 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B811F77A78500AC6152 /* Media.xcassets */; };
+		74BD17F71F8A307E00783280 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD17F61F8A307E00783280 /* ConversationTableViewCell.swift */; };
+		74BD17FB1F8A7B5C00783280 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD17FA1F8A7B5C00783280 /* ConversationsListViewController.swift */; };
+		74BD17FF1F8AA2DC00783280 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD17FE1F8AA2DC00783280 /* ConversationViewController.swift */; };
+		74BD18041F8ADDAD00783280 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD18031F8ADD0400783280 /* MessageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +31,13 @@
 		74AC1B721F7700B400AC6152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74AC1B751F7700B400AC6152 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74AC1B771F7700B400AC6152 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74AC1B7D1F77A6FE00AC6152 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		74AC1B7D1F77A6FE00AC6152 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		74AC1B811F77A78500AC6152 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		74BD17F61F8A307E00783280 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		74BD17FA1F8A7B5C00783280 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
+		74BD17FE1F8AA2DC00783280 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		74BD18031F8ADD0400783280 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +70,62 @@
 		74AC1B671F7700B400AC6152 /* Fintech Chat */ = {
 			isa = PBXGroup;
 			children = (
-				74AC1B681F7700B400AC6152 /* AppDelegate.swift */,
-				74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */,
-				74AC1B7D1F77A6FE00AC6152 /* Profile.storyboard */,
-				745A81071F781B350069D54A /* RoundedButton.swift */,
-				749EB0871F7EBF670034E38F /* RoundedImageView.swift */,
-				74AC1B721F7700B400AC6152 /* Assets.xcassets */,
-				74AC1B811F77A78500AC6152 /* Media.xcassets */,
-				74AC1B741F7700B400AC6152 /* LaunchScreen.storyboard */,
 				74AC1B771F7700B400AC6152 /* Info.plist */,
-				74AC1B6F1F7700B400AC6152 /* Fintech_Chat.xcdatamodeld */,
+				74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */,
+				74AC1B7D1F77A6FE00AC6152 /* Chat.storyboard */,
+				74BD18091F8ADF2700783280 /* Asset Catalogs */,
+				74BD18051F8ADDDE00783280 /* UI Rounded */,
+				74BD18071F8ADE3500783280 /* Conversations List */,
+				74BD18061F8ADE1600783280 /* Conversation */,
+				74BD18081F8ADE8A00783280 /* Suppoarting Files */,
 			);
 			path = "Fintech Chat";
+			sourceTree = "<group>";
+		};
+		74BD18051F8ADDDE00783280 /* UI Rounded */ = {
+			isa = PBXGroup;
+			children = (
+				745A81071F781B350069D54A /* RoundedButton.swift */,
+				749EB0871F7EBF670034E38F /* RoundedImageView.swift */,
+			);
+			path = "UI Rounded";
+			sourceTree = "<group>";
+		};
+		74BD18061F8ADE1600783280 /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				74BD17FE1F8AA2DC00783280 /* ConversationViewController.swift */,
+				74BD18031F8ADD0400783280 /* MessageTableViewCell.swift */,
+			);
+			path = Conversation;
+			sourceTree = "<group>";
+		};
+		74BD18071F8ADE3500783280 /* Conversations List */ = {
+			isa = PBXGroup;
+			children = (
+				74BD17F61F8A307E00783280 /* ConversationTableViewCell.swift */,
+				74BD17FA1F8A7B5C00783280 /* ConversationsListViewController.swift */,
+			);
+			path = "Conversations List";
+			sourceTree = "<group>";
+		};
+		74BD18081F8ADE8A00783280 /* Suppoarting Files */ = {
+			isa = PBXGroup;
+			children = (
+				74AC1B681F7700B400AC6152 /* AppDelegate.swift */,
+				74AC1B741F7700B400AC6152 /* LaunchScreen.storyboard */,
+				74AC1B6F1F7700B400AC6152 /* Fintech_Chat.xcdatamodeld */,
+			);
+			path = "Suppoarting Files";
+			sourceTree = "<group>";
+		};
+		74BD18091F8ADF2700783280 /* Asset Catalogs */ = {
+			isa = PBXGroup;
+			children = (
+				74AC1B811F77A78500AC6152 /* Media.xcassets */,
+				74AC1B721F7700B400AC6152 /* Assets.xcassets */,
+			);
+			path = "Asset Catalogs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74AC1B7E1F77A6FE00AC6152 /* Profile.storyboard in Resources */,
+				74AC1B7E1F77A6FE00AC6152 /* Chat.storyboard in Resources */,
 				74AC1B761F7700B400AC6152 /* LaunchScreen.storyboard in Resources */,
 				74AC1B821F77A78500AC6152 /* Media.xcassets in Resources */,
 				74AC1B731F7700B400AC6152 /* Assets.xcassets in Resources */,
@@ -151,8 +203,12 @@
 			files = (
 				74AC1B801F77A76500AC6152 /* ProfileViewController.swift in Sources */,
 				749EB0881F7EBF670034E38F /* RoundedImageView.swift in Sources */,
+				74BD18041F8ADDAD00783280 /* MessageTableViewCell.swift in Sources */,
+				74BD17FF1F8AA2DC00783280 /* ConversationViewController.swift in Sources */,
+				74BD17F71F8A307E00783280 /* ConversationTableViewCell.swift in Sources */,
 				74AC1B711F7700B400AC6152 /* Fintech_Chat.xcdatamodeld in Sources */,
 				74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */,
+				74BD17FB1F8A7B5C00783280 /* ConversationsListViewController.swift in Sources */,
 				745A81081F781B350069D54A /* RoundedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
