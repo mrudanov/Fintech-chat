@@ -33,11 +33,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Set in-button image "margins"
         takePictureButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         // Ответ на пункт 3.4 ДЗ. Значения frame для кнопки одинаковы в методах viewDidLoad и viewWillAppear,
