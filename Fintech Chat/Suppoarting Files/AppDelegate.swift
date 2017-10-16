@@ -13,6 +13,8 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    let userDataFileName = "UserInfo.txt"
 
     // variable to store current application state
     var appState = UIApplicationState(rawValue: 1)!

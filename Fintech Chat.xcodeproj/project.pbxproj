@@ -20,6 +20,9 @@
 		74BD17FB1F8A7B5C00783280 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD17FA1F8A7B5C00783280 /* ConversationsListViewController.swift */; };
 		74BD17FF1F8AA2DC00783280 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD17FE1F8AA2DC00783280 /* ConversationViewController.swift */; };
 		74BD18041F8ADDAD00783280 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD18031F8ADD0400783280 /* MessageTableViewCell.swift */; };
+		74BE69801F9397710038CB12 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BE697F1F9397710038CB12 /* OperationDataManager.swift */; };
+		74BE69821F93E6770038CB12 /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BE69811F93E6770038CB12 /* DataManagerProtocol.swift */; };
+		74BE69841F93ED340038CB12 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BE69831F93ED340038CB12 /* GCDDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		74BD17FA1F8A7B5C00783280 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		74BD17FE1F8AA2DC00783280 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		74BD18031F8ADD0400783280 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		74BE697F1F9397710038CB12 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
+		74BE69811F93E6770038CB12 /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
+		74BE69831F93ED340038CB12 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,13 +77,13 @@
 			isa = PBXGroup;
 			children = (
 				74AC1B771F7700B400AC6152 /* Info.plist */,
-				74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */,
 				74AC1B7D1F77A6FE00AC6152 /* Chat.storyboard */,
 				74BD18091F8ADF2700783280 /* Asset Catalogs */,
 				74BD18051F8ADDDE00783280 /* UI Rounded */,
 				74BD18071F8ADE3500783280 /* Conversations List */,
 				74BD18061F8ADE1600783280 /* Conversation */,
 				74BD18081F8ADE8A00783280 /* Suppoarting Files */,
+				74BE69861F94065C0038CB12 /* Profile */,
 			);
 			path = "Fintech Chat";
 			sourceTree = "<group>";
@@ -126,6 +132,17 @@
 				74AC1B721F7700B400AC6152 /* Assets.xcassets */,
 			);
 			path = "Asset Catalogs";
+			sourceTree = "<group>";
+		};
+		74BE69861F94065C0038CB12 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */,
+				74BE697F1F9397710038CB12 /* OperationDataManager.swift */,
+				74BE69831F93ED340038CB12 /* GCDDataManager.swift */,
+				74BE69811F93E6770038CB12 /* DataManagerProtocol.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,9 +219,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				74AC1B801F77A76500AC6152 /* ProfileViewController.swift in Sources */,
+				74BE69801F9397710038CB12 /* OperationDataManager.swift in Sources */,
 				749EB0881F7EBF670034E38F /* RoundedImageView.swift in Sources */,
+				74BE69821F93E6770038CB12 /* DataManagerProtocol.swift in Sources */,
 				74BD18041F8ADDAD00783280 /* MessageTableViewCell.swift in Sources */,
 				74BD17FF1F8AA2DC00783280 /* ConversationViewController.swift in Sources */,
+				74BE69841F93ED340038CB12 /* GCDDataManager.swift in Sources */,
 				74BD17F71F8A307E00783280 /* ConversationTableViewCell.swift in Sources */,
 				74AC1B711F7700B400AC6152 /* Fintech_Chat.xcdatamodeld in Sources */,
 				74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */,

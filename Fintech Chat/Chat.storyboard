@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qWI-1C-V4T">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" minimumZoomScale="2" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qWI-1C-V4T">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -271,62 +271,98 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npu-r6-Ltc">
-                                        <rect key="frame" x="0.0" y="312" width="320" height="124"/>
+                                        <rect key="frame" x="0.0" y="312" width="320" height="128"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mikhail Rudanov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3H-9J-cr7">
-                                                <rect key="frame" x="16" y="16" width="288" height="26.5"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ваше имя" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kht-Z7-rsQ">
+                                                <rect key="frame" x="16" y="16" width="288" height="24"/>
                                                 <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="I 💜crafting insane IOS apps, riding bicycle and Oreo's 🙃" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23q-t2-mbh">
-                                                <rect key="frame" x="16" y="47.5" width="288" height="43"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" keyboardType="namePhonePad" returnKeyType="done" textContentType="name"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="О себе" minimumFontSize="13" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lS7-Gr-S1s">
+                                                <rect key="frame" x="16" y="48" width="288" height="19"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                            </textField>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5OM-2o-zAV">
+                                                <rect key="frame" x="141" y="83" width="37" height="37"/>
+                                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="J3H-9J-cr7" firstAttribute="leading" secondItem="Npu-r6-Ltc" secondAttribute="leading" constant="16" id="Jnb-AX-YFQ"/>
-                                            <constraint firstItem="23q-t2-mbh" firstAttribute="top" secondItem="J3H-9J-cr7" secondAttribute="bottom" constant="5" id="R74-Ub-kL5"/>
-                                            <constraint firstItem="23q-t2-mbh" firstAttribute="leading" secondItem="Npu-r6-Ltc" secondAttribute="leading" constant="16" id="Td7-OG-Kxw"/>
-                                            <constraint firstAttribute="trailing" secondItem="J3H-9J-cr7" secondAttribute="trailing" constant="16" id="dsU-fN-20z"/>
-                                            <constraint firstItem="J3H-9J-cr7" firstAttribute="top" secondItem="Npu-r6-Ltc" secondAttribute="top" constant="16" id="i99-si-fQv"/>
-                                            <constraint firstAttribute="trailing" secondItem="23q-t2-mbh" secondAttribute="trailing" constant="16" id="se3-td-75r"/>
+                                            <constraint firstItem="lS7-Gr-S1s" firstAttribute="leading" secondItem="Npu-r6-Ltc" secondAttribute="leading" constant="16" id="9lm-YJ-6qm"/>
+                                            <constraint firstItem="5OM-2o-zAV" firstAttribute="centerX" secondItem="Npu-r6-Ltc" secondAttribute="centerX" id="RmY-VH-NCe"/>
+                                            <constraint firstAttribute="trailing" secondItem="lS7-Gr-S1s" secondAttribute="trailing" constant="16" id="W1Z-kD-mnj"/>
+                                            <constraint firstAttribute="bottom" secondItem="5OM-2o-zAV" secondAttribute="bottom" constant="8" id="foP-76-aNR"/>
+                                            <constraint firstItem="kht-Z7-rsQ" firstAttribute="top" secondItem="Npu-r6-Ltc" secondAttribute="top" constant="16" id="oBT-ed-TRa"/>
+                                            <constraint firstItem="lS7-Gr-S1s" firstAttribute="top" secondItem="kht-Z7-rsQ" secondAttribute="bottom" constant="8" id="pFz-eb-K1d"/>
+                                            <constraint firstItem="kht-Z7-rsQ" firstAttribute="leading" secondItem="Npu-r6-Ltc" secondAttribute="leading" constant="16" id="pz0-gb-Wnd"/>
+                                            <constraint firstAttribute="trailing" secondItem="kht-Z7-rsQ" secondAttribute="trailing" constant="16" id="rZg-8f-eSX"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gRV-KY-jpx">
-                                        <rect key="frame" x="0.0" y="436" width="320" height="68"/>
+                                        <rect key="frame" x="0.0" y="440" width="320" height="64"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyM-gW-Kei" customClass="RoundedButton" customModule="Fintech_Chat" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="8" width="288" height="44"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="UlY-aa-SNq">
+                                                <rect key="frame" x="16" y="8" width="288" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jcq-G3-qXc" customClass="RoundedButton" customModule="Fintech_Chat" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="134" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="wP7-3d-g6U"/>
+                                                        </constraints>
+                                                        <state key="normal" title="GCD">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="saveWirhGCDPressed:" destination="ikB-ex-ZNy" eventType="touchUpInside" id="nu1-ar-juu"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPi-5M-fLu" customClass="RoundedButton" customModule="Fintech_Chat" customModuleProvider="target">
+                                                        <rect key="frame" x="154" y="0.0" width="134" height="40"/>
+                                                        <state key="normal" title="Operation">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="saveWithOperationPressed:" destination="ikB-ex-ZNy" eventType="touchUpInside" id="TGi-r1-RiQ"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="44" id="had-YN-ZbU"/>
+                                                    <constraint firstItem="UPi-5M-fLu" firstAttribute="height" secondItem="Jcq-G3-qXc" secondAttribute="height" id="hyk-OX-hcZ"/>
                                                 </constraints>
-                                                <state key="normal" title="Редактировать">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" cocoaTouchSystemColor="darkTextColor"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="15"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="gyM-gW-Kei" secondAttribute="trailing" constant="16" id="3rm-XC-KNh"/>
-                                            <constraint firstAttribute="bottom" secondItem="gyM-gW-Kei" secondAttribute="bottom" constant="16" id="QRF-R7-ggN"/>
-                                            <constraint firstItem="gyM-gW-Kei" firstAttribute="leading" secondItem="gRV-KY-jpx" secondAttribute="leading" constant="16" id="WkM-zU-FDs"/>
-                                            <constraint firstItem="gyM-gW-Kei" firstAttribute="top" secondItem="gRV-KY-jpx" secondAttribute="top" constant="8" id="oIZ-YC-Wk2"/>
+                                            <constraint firstAttribute="trailing" secondItem="UlY-aa-SNq" secondAttribute="trailing" constant="16" id="9SB-vF-iLE"/>
+                                            <constraint firstItem="UlY-aa-SNq" firstAttribute="top" secondItem="gRV-KY-jpx" secondAttribute="top" constant="8" id="DvR-Zj-6By"/>
+                                            <constraint firstItem="UlY-aa-SNq" firstAttribute="leading" secondItem="gRV-KY-jpx" secondAttribute="leading" constant="16" id="VMa-7G-pbA"/>
+                                            <constraint firstAttribute="bottom" secondItem="UlY-aa-SNq" secondAttribute="bottom" constant="16" id="iVD-TR-mk3"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -344,19 +380,23 @@
                     <navigationItem key="navigationItem" title="Profile" id="gCW-rh-Pdw">
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="stop" id="vgN-TU-bjZ">
                             <connections>
-                                <segue destination="4U1-sA-kvP" kind="presentation" id="tWe-XH-0Yy"/>
+                                <action selector="backButtonPressed:" destination="ikB-ex-ZNy" id="wOa-M9-vk0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="editProfileButton" destination="gyM-gW-Kei" id="2kQ-my-qiO"/>
+                        <outlet property="activityIndicator" destination="5OM-2o-zAV" id="SEa-qb-JHo"/>
+                        <outlet property="descriptionTextField" destination="lS7-Gr-S1s" id="TPm-sB-7d0"/>
+                        <outlet property="nameTextField" destination="kht-Z7-rsQ" id="fGR-AP-Qv6"/>
                         <outlet property="profileImage" destination="dIA-e3-K5B" id="QhE-1C-Sn1"/>
+                        <outlet property="saveGCDButton" destination="Jcq-G3-qXc" id="Lf7-52-O9s"/>
+                        <outlet property="saveOperationButton" destination="UPi-5M-fLu" id="62t-FO-a9m"/>
                         <outlet property="takePictureButton" destination="cJo-V9-gvo" id="dNV-hF-lv1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDl-89-wcu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1643" y="-614"/>
+            <point key="canvasLocation" x="1642.5" y="-614.78873239436621"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xb2-Js-mme">
