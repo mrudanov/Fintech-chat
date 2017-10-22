@@ -9,64 +9,55 @@
 import UIKit
 
 class ConversationsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     struct ConversationPreview {
+        var userID: String
         var name: String?
         var message: String?
         var date: Date?
-        var online: Bool
         var hasUnreadMessages: Bool
     }
     
     @IBOutlet weak var conversationsListTableView: UITableView!
-    var selectedContactName: String?
+    var dataManager: DataManager = GCDDataManager()
+    var communicator: MultipeerCommunicator?
+    var communicationManager: CommunicationManager?
+    
+    var onlineUsers: [ConversationPreview] = []
+    var offlineUsers: [ConversationPreview] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        loadUserInfo()
     }
     
-    let fakeData: [Array<ConversationPreview>] = [
-        [ConversationPreview(name: "Михаил Руданов", message: "Hi, wasup?", date: Date(), online: true, hasUnreadMessages: true),
-        ConversationPreview(name: "Артем Киселев", message: "Доделал домашку?", date: Date(timeInterval: -10*60, since: Date()), online: true, hasUnreadMessages: true),
-        ConversationPreview(name: "Steve Voznik", message: "Nice app, bro 😎", date: Date(timeInterval: -60*60, since: Date()), online: true, hasUnreadMessages: true),
-        ConversationPreview(name: "Tim Cook", message: "Wanna invite you to our new campus 🏢", date: Date(timeInterval: -2*60*60, since: Date()), online: true, hasUnreadMessages: false),
-        ConversationPreview(name: "Phil Schiller", message: "Yes, it's a great idea!", date: Date(timeInterval: -3*60*60, since: Date()), online: true, hasUnreadMessages: false),
-        ConversationPreview(name: "Jonathan Ive", message: "Just saw your design project. Insane!", date: Date(timeInterval: -24*60*60, since: Date()), online: true, hasUnreadMessages: false),
-        ConversationPreview(name: "Scott Forstall", message: "Testing IOS 11.1 on IPhone X prototype", date: Date(timeInterval: -28*60*60, since: Date()), online: true, hasUnreadMessages: true),
-        ConversationPreview(name: "Craig Federighi", message: nil, date: nil, online: true, hasUnreadMessages: false),
-        ConversationPreview(name: nil, message: "Привет, как деа?", date: Date(timeInterval: -48*60*60, since: Date()), online: true, hasUnreadMessages: true),
-        ConversationPreview(name: nil, message: nil, date: nil, online: true, hasUnreadMessages: false)],
-        
-        [ConversationPreview(name: "Михаил Руданов v2", message: "Hi, wasup?", date: Date(), online: false, hasUnreadMessages: true),
-        ConversationPreview(name: "Артем Киселев v2", message: "Доделал домашку?", date: Date(timeInterval: -10*60, since: Date()), online: false, hasUnreadMessages: true),
-        ConversationPreview(name: "Steve Voznik v2", message: "Nice app, bro 😎", date: Date(timeInterval: -60*60, since: Date()), online: false, hasUnreadMessages: true),
-        ConversationPreview(name: "Tim Cook v2", message: "Wanna invite you to our new campus 🏢", date: Date(timeInterval: -2*60*60, since: Date()), online: false, hasUnreadMessages: false),
-        ConversationPreview(name: "Phil Schiller v2", message: "Yes, it's a great idea!", date: Date(timeInterval: -3*60*60, since: Date()), online: false, hasUnreadMessages: false),
-        ConversationPreview(name: "Jonathan Ive v2", message: "Just saw your design project. Insane!", date: Date(timeInterval: -3.5*60*60, since: Date()), online: false, hasUnreadMessages: false),
-        ConversationPreview(name: "Scott Forstall v2", message: "Testing IOS 11.1 on IPhone X prototype", date: Date(timeInterval: -24*60*60, since: Date()), online: false, hasUnreadMessages: true),
-        ConversationPreview(name: "Craig Federighi v2", message: nil, date: nil, online: false, hasUnreadMessages: false),
-        ConversationPreview(name: nil, message: "Привет, как деа? v2", date: Date(timeInterval: -26*60*60, since: Date()), online: false, hasUnreadMessages: true),
-        ConversationPreview(name: nil, message: nil, date: nil, online: false, hasUnreadMessages: false)]]
+    override func viewDidAppear(_ animated: Bool) {
+        communicationManager?.delegate = self
+        sortOnlineUsers()
+        onlineUsers = []
+        offlineUsers = []
+        communicationManager?.updateOnlineUsers()
+    }
 
     // MARK: - Table View protocols
     func numberOfSections(in tableView: UITableView) -> Int {
-        return fakeData.count
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fakeData[section].count
+        return section == 0 ? onlineUsers.count : offlineUsers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath)
-        let preview = fakeData[indexPath.section][indexPath.row]
+        let preview = indexPath.section == 0 ?onlineUsers[indexPath.row] : offlineUsers[indexPath.row]
         
         if let conversationCell = cell as? ConversationTableViewCell {
             conversationCell.name = preview.name
             conversationCell.message = preview.message
             conversationCell.date = preview.date
-            conversationCell.online = preview.online
+            conversationCell.online = indexPath.section == 0
             conversationCell.hasUnreadMessages = preview.hasUnreadMessages
             conversationCell.updateCellUI()
         }
@@ -86,9 +77,90 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
         if segue.identifier == "showConversation" {
             if let destinationVC = segue.destination as? ConversationViewController{
                 if let indexPath = conversationsListTableView.indexPathForSelectedRow {
-                    destinationVC.contactName = fakeData[indexPath.section][indexPath.row].name
+                    destinationVC.contactName = indexPath.section == 0 ? onlineUsers[indexPath.row].name : offlineUsers[indexPath.row].name
+                    destinationVC.userID = indexPath.section == 0 ? onlineUsers[indexPath.row].userID : offlineUsers[indexPath.row].userID
+                    destinationVC.communicationManager = communicationManager
+                    communicationManager?.delegate = destinationVC
                 }
             }
         }
+    }
+    
+    // MARK: - Update UI
+    func sortOnlineUsers() {
+        onlineUsers = onlineUsers.sorted() {
+            if $0.date != nil {
+                if $1.date != nil {
+                    return $0.date! > $1.date!
+                } else {
+                    return true
+                }
+            } else {
+                if $1.date != nil {
+                    return false
+                } else {
+                    if $0.name != nil && $0.name != nil {
+                        return $0.name! < $0.name!
+                    } else {
+                        return $0.name != nil
+                    }
+                }
+            }
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.conversationsListTableView.reloadData()
+        }
+    }
+    
+    // MARK: - Load user data
+    func loadUserInfo() {
+        guard let fileName = ((UIApplication.shared.delegate) as? AppDelegate)?.userDataFileName else { return }
+        // Get user data file directory
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent(fileName)
+            
+            // Load data with data manager
+            dataManager.loadUserInfo(from: fileURL) { [weak self] error, name, info, image in
+                self?.communicationManager = CommunicationManager()
+                self?.communicator = MultipeerCommunicator(visibleName: name)
+                self?.communicator?.delegate = self?.communicationManager
+                self?.communicationManager?.delegate = self
+                self?.communicationManager?.communicator = self?.communicator
+                self?.communicator?.online = true
+            }
+        } else {
+            self.communicationManager = CommunicationManager()
+            self.communicator = MultipeerCommunicator(visibleName: nil)
+            self.communicator?.delegate = self.communicationManager
+            self.communicationManager?.delegate = self
+            self.communicationManager?.communicator = self.communicator
+            self.communicator?.online = true
+        }
+    }
+}
+
+extension ConversationsListViewController: CommunicationManagerDelegate {
+    func addOnlineUser(userID: String, name: String?, lastText: String?, lastTextDate: Date?) {
+        print("Adding user \(name ?? userID)")
+        if let index = onlineUsers.index(where: { $0.userID == userID }) {
+            onlineUsers[index] = ConversationPreview(userID: userID, name: name, message: lastText, date: lastTextDate, hasUnreadMessages: false)
+        } else {
+            onlineUsers.append(ConversationPreview(userID: userID, name: name, message: lastText, date: lastTextDate, hasUnreadMessages: false))
+        }
+        sortOnlineUsers()
+    }
+    
+    func removeOnlineUser(userID: String) {
+        print("Removing user \(userID)")
+        onlineUsers = onlineUsers.filter() { $0.userID != userID }
+        sortOnlineUsers()
+    }
+    
+    func recievedMessage(text: String, fromUser: String, date: Date) {
+        if let index = onlineUsers.index(where: { $0.userID == fromUser }) {
+            onlineUsers[index].message = text
+            onlineUsers[index].date = date
+        }
+        sortOnlineUsers()
     }
 }

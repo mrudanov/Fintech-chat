@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -114,7 +114,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxx-Ik-tK8">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="453"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="OutputMessageCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OutputMessageCell" id="NeV-av-4hD" customClass="MessageTableViewCell" customModule="Fintech_Chat" customModuleProvider="target">
@@ -197,10 +197,34 @@
                                     <outlet property="delegate" destination="QT6-ma-2T3" id="rjf-ZO-NYa"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dT9-9d-UdS">
+                                <rect key="frame" x="0.0" y="517" width="320" height="51"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Написать" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="494-HE-g3b">
+                                        <rect key="frame" x="8" y="8" width="304" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="Vbf-JX-9w1"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.87404201036907847" green="0.87404201036907847" blue="0.87404201036907847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="494-HE-g3b" secondAttribute="bottom" constant="8" id="4zY-YR-ZQi"/>
+                                    <constraint firstItem="494-HE-g3b" firstAttribute="top" secondItem="dT9-9d-UdS" secondAttribute="top" constant="8" id="HUZ-dF-qjL"/>
+                                    <constraint firstAttribute="trailing" secondItem="494-HE-g3b" secondAttribute="trailing" constant="8" id="dSK-09-YU7"/>
+                                    <constraint firstItem="494-HE-g3b" firstAttribute="leading" secondItem="dT9-9d-UdS" secondAttribute="leading" constant="8" id="zkJ-e5-RK9"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mxx-Ik-tK8" firstAttribute="bottom" secondItem="PUR-S0-fzg" secondAttribute="bottom" id="cRD-b2-Zkn"/>
+                            <constraint firstItem="dT9-9d-UdS" firstAttribute="trailing" secondItem="PUR-S0-fzg" secondAttribute="trailing" id="D9h-CY-W3R"/>
+                            <constraint firstItem="dT9-9d-UdS" firstAttribute="top" secondItem="mxx-Ik-tK8" secondAttribute="bottom" id="L82-tk-eMA"/>
+                            <constraint firstItem="dT9-9d-UdS" firstAttribute="bottom" secondItem="PUR-S0-fzg" secondAttribute="bottom" id="RFm-Xf-vCy"/>
+                            <constraint firstItem="dT9-9d-UdS" firstAttribute="leading" secondItem="PUR-S0-fzg" secondAttribute="leading" id="YHv-zv-qIZ"/>
                             <constraint firstItem="mxx-Ik-tK8" firstAttribute="trailing" secondItem="PUR-S0-fzg" secondAttribute="trailing" id="dxY-C5-XdQ"/>
                             <constraint firstItem="mxx-Ik-tK8" firstAttribute="leading" secondItem="PUR-S0-fzg" secondAttribute="leading" id="g5f-dD-BCK"/>
                             <constraint firstItem="mxx-Ik-tK8" firstAttribute="top" secondItem="PUR-S0-fzg" secondAttribute="top" id="uS5-fv-Eou"/>
@@ -209,6 +233,7 @@
                     </view>
                     <connections>
                         <outlet property="conversationTableView" destination="mxx-Ik-tK8" id="0sT-rn-fjA"/>
+                        <outlet property="messageTextField" destination="494-HE-g3b" id="hEP-qq-wPh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Io-6j-P9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
