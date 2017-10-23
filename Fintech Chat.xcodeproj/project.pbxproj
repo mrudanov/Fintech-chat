@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		745A788B1F9B429900C16206 /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A788A1F9B429900C16206 /* MultipeerCommunicator.swift */; };
+		745A788D1F9B530700C16206 /* CommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A788C1F9B530700C16206 /* CommunicationManager.swift */; };
 		745A81081F781B350069D54A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A81071F781B350069D54A /* RoundedButton.swift */; };
 		749EB0881F7EBF670034E38F /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749EB0871F7EBF670034E38F /* RoundedImageView.swift */; };
 		74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AC1B681F7700B400AC6152 /* AppDelegate.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		745A788A1F9B429900C16206 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
+		745A788C1F9B530700C16206 /* CommunicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
 		745A81071F781B350069D54A /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		749EB0871F7EBF670034E38F /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		74AC1B651F7700B400AC6152 /* Fintech Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fintech Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +88,8 @@
 				74BD18061F8ADE1600783280 /* Conversation */,
 				74BD18081F8ADE8A00783280 /* Suppoarting Files */,
 				74BE69861F94065C0038CB12 /* Profile */,
+				745A788A1F9B429900C16206 /* MultipeerCommunicator.swift */,
+				745A788C1F9B530700C16206 /* CommunicationManager.swift */,
 			);
 			path = "Fintech Chat";
 			sourceTree = "<group>";
@@ -226,6 +232,8 @@
 				74BD17FF1F8AA2DC00783280 /* ConversationViewController.swift in Sources */,
 				74BE69841F93ED340038CB12 /* GCDDataManager.swift in Sources */,
 				74BD17F71F8A307E00783280 /* ConversationTableViewCell.swift in Sources */,
+				745A788D1F9B530700C16206 /* CommunicationManager.swift in Sources */,
+				745A788B1F9B429900C16206 /* MultipeerCommunicator.swift in Sources */,
 				74AC1B711F7700B400AC6152 /* Fintech_Chat.xcdatamodeld in Sources */,
 				74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */,
 				74BD17FB1F8A7B5C00783280 /* ConversationsListViewController.swift in Sources */,
