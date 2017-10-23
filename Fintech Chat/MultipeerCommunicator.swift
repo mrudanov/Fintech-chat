@@ -102,6 +102,7 @@ extension MultipeerCommunicator: MCNearbyServiceBrowserDelegate {
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("Found peer \(info?["userName"] ?? "NO USERNAME")")
+        
         let newSession = sessions[peerID] ?? MCSession(peer: peer, securityIdentity: nil, encryptionPreference: .none)
         sessions[peerID] = newSession
         newSession.delegate = self
@@ -109,7 +110,8 @@ extension MultipeerCommunicator: MCNearbyServiceBrowserDelegate {
         if newSession.connectedPeers.index(where: { $0 == peerID }) != nil {
             delegate?.didFoundUser(userID: peerID.displayName, userName: foundPeers[peerID])
         } else {
-            browser.invitePeer(peerID, to: newSession, withContext: nil, timeout: 100)
+            print("Inviting peer")
+            browser.invitePeer(peerID, to: newSession, withContext: nil, timeout: 5)
         }
     }
     
@@ -131,6 +133,8 @@ extension MultipeerCommunicator: MCSessionDelegate {
             print("Connecting  with: \(peerID.displayName)")
         default:
             print("Did not connect to session with: \(peerID.displayName)")
+            // Try connect again
+            browser.invitePeer(peer, to: session, withContext: nil, timeout: 10)
         }
     }
     

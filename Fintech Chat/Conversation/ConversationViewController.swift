@@ -34,7 +34,13 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.recievedMessage(_:)), name: NSNotification.Name("DidRecievedMessage"), object: nil)
+        
         messageTextField.delegate = self
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     
@@ -47,10 +53,6 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -122,12 +124,10 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         }))
         self.present(errorAlertController, animated: true, completion: nil)
     }
-}
-
-extension ConversationViewController: CommunicationManagerDelegate {
-    func addOnlineUser(userID: String, name: String?, lastText: String?, lastTextDate: Date?) {}
-    func removeOnlineUser(userID: String) {}
-    func recievedMessage(text: String, fromUser: String, date: Date) {
+    
+    // MARK: - Handle notifications
+    @objc func recievedMessage(_ notification: NSNotification) {
+        guard let text = notification.userInfo!["text"] as? String else {return}
         messages.append(Message.input(text))
         updateTable()
     }

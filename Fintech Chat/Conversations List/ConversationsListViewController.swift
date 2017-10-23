@@ -29,15 +29,16 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.recievedMessage(_:)), name: NSNotification.Name("DidRecievedMessage"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.addOnlineUser(_:)), name: NSNotification.Name("DidFoundUser"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.removeOnlineUser(_:)), name: NSNotification.Name("DidLostUser"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.sendMessage(_:)), name: NSNotification.Name("DidSendMessage"), object: nil)
+        
         loadUserInfo()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        communicationManager?.delegate = self
-        sortOnlineUsers()
-        onlineUsers = []
-        offlineUsers = []
-        communicationManager?.updateOnlineUsers()
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Table View protocols
@@ -80,7 +81,6 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
                     destinationVC.contactName = indexPath.section == 0 ? onlineUsers[indexPath.row].name : offlineUsers[indexPath.row].name
                     destinationVC.userID = indexPath.section == 0 ? onlineUsers[indexPath.row].userID : offlineUsers[indexPath.row].userID
                     destinationVC.communicationManager = communicationManager
-                    communicationManager?.delegate = destinationVC
                 }
             }
         }
@@ -89,23 +89,13 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
     // MARK: - Update UI
     func sortOnlineUsers() {
         onlineUsers = onlineUsers.sorted() {
-            if $0.date != nil {
-                if $1.date != nil {
-                    return $0.date! > $1.date!
-                } else {
-                    return true
-                }
-            } else {
-                if $1.date != nil {
-                    return false
-                } else {
-                    if $0.name != nil && $0.name != nil {
-                        return $0.name! < $0.name!
-                    } else {
-                        return $0.name != nil
-                    }
-                }
-            }
+            if $0.date != nil && $1.date != nil {return $0.date! > $1.date!}
+            if $0.date != nil && $1.date == nil {return true}
+            if $0.date == nil && $1.date != nil {return false}
+            if $0.name != nil && $1.name != nil {return $0.name! < $1.name!}
+            if $0.name != nil && $1.name == nil {return true}
+            if $0.name == nil && $1.name != nil {return false}
+            return $0.userID > $1.userID
         }
         DispatchQueue.main.async { [weak self] in
             self?.conversationsListTableView.reloadData()
@@ -124,7 +114,6 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
                 self?.communicationManager = CommunicationManager()
                 self?.communicator = MultipeerCommunicator(visibleName: name)
                 self?.communicator?.delegate = self?.communicationManager
-                self?.communicationManager?.delegate = self
                 self?.communicationManager?.communicator = self?.communicator
                 self?.communicator?.online = true
             }
@@ -132,32 +121,48 @@ class ConversationsListViewController: UIViewController, UITableViewDelegate, UI
             self.communicationManager = CommunicationManager()
             self.communicator = MultipeerCommunicator(visibleName: nil)
             self.communicator?.delegate = self.communicationManager
-            self.communicationManager?.delegate = self
             self.communicationManager?.communicator = self.communicator
             self.communicator?.online = true
         }
     }
-}
-
-extension ConversationsListViewController: CommunicationManagerDelegate {
-    func addOnlineUser(userID: String, name: String?, lastText: String?, lastTextDate: Date?) {
-        print("Adding user \(name ?? userID)")
+    
+    // MARK: - Notifications handling
+    @objc func addOnlineUser(_ notification: NSNotification) {
+        print("Adding user")
+        guard let userID = notification.userInfo!["userID"] as? String else {return}
+        guard let text = notification.userInfo!["text"] as? String? else {return}
+        guard let date = notification.userInfo!["date"] as? Date? else {return}
+        guard let name = notification.userInfo!["name"] as? String else {return}
         if let index = onlineUsers.index(where: { $0.userID == userID }) {
-            onlineUsers[index] = ConversationPreview(userID: userID, name: name, message: lastText, date: lastTextDate, hasUnreadMessages: false)
+            onlineUsers[index] = ConversationPreview(userID: userID, name: name, message: text, date: date, hasUnreadMessages: false)
         } else {
-            onlineUsers.append(ConversationPreview(userID: userID, name: name, message: lastText, date: lastTextDate, hasUnreadMessages: false))
+            onlineUsers.append(ConversationPreview(userID: userID, name: name, message: text, date: date, hasUnreadMessages: false))
         }
         sortOnlineUsers()
     }
     
-    func removeOnlineUser(userID: String) {
-        print("Removing user \(userID)")
+    @objc func removeOnlineUser(_ notification: NSNotification) {
+        print("Removing user")
+        guard let userID = notification.userInfo!["userID"] as? String else {return}
         onlineUsers = onlineUsers.filter() { $0.userID != userID }
         sortOnlineUsers()
     }
     
-    func recievedMessage(text: String, fromUser: String, date: Date) {
-        if let index = onlineUsers.index(where: { $0.userID == fromUser }) {
+    @objc func recievedMessage(_ notification: NSNotification) {
+        guard let text = notification.userInfo!["text"] as? String else {return}
+        guard let date = notification.userInfo!["date"] as? Date else {return}
+        guard let from = notification.userInfo!["from"] as? String else {return}
+        if let index = onlineUsers.index(where: { $0.userID == from }) {
+            onlineUsers[index].message = text
+            onlineUsers[index].date = date
+        }
+        sortOnlineUsers()
+    }
+    @objc func sendMessage(_ notification: NSNotification) {
+        guard let text = notification.userInfo!["text"] as? String else {return}
+        guard let date = notification.userInfo!["date"] as? Date else {return}
+        guard let to = notification.userInfo!["to"] as? String else {return}
+        if let index = onlineUsers.index(where: { $0.userID == to }) {
             onlineUsers[index].message = text
             onlineUsers[index].date = date
         }
