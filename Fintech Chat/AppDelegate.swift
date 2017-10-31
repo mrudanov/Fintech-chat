@@ -14,47 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let userDataFileName = "UserInfo.txt"
-
-    // variable to store current application state
-    var appState = UIApplicationState(rawValue: 1)!
-    // dictionary to convert UIApplicationState to String
-    let possibleStates: [UIApplicationState: String] = [.active: "active", .inactive: "inactive", .background: "background"]
-
+    let rootAssembly = RootAssembly()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        printAppState(from: #function)
-        return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        printAppState(from: #function)
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        printAppState(from: #function)
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        printAppState(from: #function)
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        printAppState(from: #function)
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        printAppState(from: #function)
-    }
-    
-    // MARK: - Print app state
-    
-    func printAppState(from function: String) {
-        // Get new state
-        let newState: UIApplicationState = UIApplication.shared.applicationState
-        print("Application moved from \(possibleStates[appState]!) to \(possibleStates[newState]!) state: \(function)")
         
-        // Save current state
-        appState = newState
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let mainVC = rootAssembly.conversationsListModule.embededInNavProfileVC(service: rootAssembly.communicationService)
+        window?.rootViewController = mainVC
+        window?.makeKeyAndVisible()
+        return true
     }
 
     // MARK: - Core Data stack
