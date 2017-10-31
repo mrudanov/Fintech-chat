@@ -7,30 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		744A27B61FA895F000D71AFE /* ProfileAssebly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744A27B51FA895F000D71AFE /* ProfileAssebly.swift */; };
+		744A27B81FA89BFB00D71AFE /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 744A27B71FA89BFB00D71AFE /* Profile.storyboard */; };
 		745A788B1F9B429900C16206 /* MultipeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A788A1F9B429900C16206 /* MultipeerCommunicator.swift */; };
-		745A788D1F9B530700C16206 /* CommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A788C1F9B530700C16206 /* CommunicationManager.swift */; };
 		745A81081F781B350069D54A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A81071F781B350069D54A /* RoundedButton.swift */; };
+		745D47671FA7174E00457F70 /* ConversationAssebly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745D47661FA7174E00457F70 /* ConversationAssebly.swift */; };
+		745D47691FA7178300457F70 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745D47681FA7178300457F70 /* ConversationModel.swift */; };
+		745D476D1FA7ADA300457F70 /* ConversationsList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745D476C1FA7ADA200457F70 /* ConversationsList.storyboard */; };
+		745D476F1FA7AEC300457F70 /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745D476E1FA7AEC300457F70 /* Conversation.storyboard */; };
+		746E930B1FA8671C00C4C7C6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E930A1FA8671C00C4C7C6 /* DataService.swift */; };
+		746E930D1FA8684E00C4C7C6 /* GCDTasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E930C1FA8684E00C4C7C6 /* GCDTasker.swift */; };
+		746E930F1FA869D000C4C7C6 /* OperationTasker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E930E1FA869D000C4C7C6 /* OperationTasker.swift */; };
+		746E93111FA86D4400C4C7C6 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E93101FA86D4400C4C7C6 /* FileStorage.swift */; };
+		746E93131FA884BA00C4C7C6 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E93121FA884BA00C4C7C6 /* ProfileModel.swift */; };
+		7470BFEC1FA632E900F606D6 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7470BFEB1FA632E900F606D6 /* RootAssembly.swift */; };
+		7470BFF41FA644B600F606D6 /* CommunicatonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7470BFF31FA644B600F606D6 /* CommunicatonService.swift */; };
+		7470BFF61FA6559400F606D6 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7470BFF51FA6559400F606D6 /* ConversationsListAssembly.swift */; };
+		7470BFF81FA6641200F606D6 /* ConversationsPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7470BFF71FA6641200F606D6 /* ConversationsPreviewModel.swift */; };
 		749EB0881F7EBF670034E38F /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749EB0871F7EBF670034E38F /* RoundedImageView.swift */; };
 		74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AC1B681F7700B400AC6152 /* AppDelegate.swift */; };
 		74AC1B711F7700B400AC6152 /* Fintech_Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74AC1B6F1F7700B400AC6152 /* Fintech_Chat.xcdatamodeld */; };
 		74AC1B731F7700B400AC6152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B721F7700B400AC6152 /* Assets.xcassets */; };
 		74AC1B761F7700B400AC6152 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B741F7700B400AC6152 /* LaunchScreen.storyboard */; };
-		74AC1B7E1F77A6FE00AC6152 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B7D1F77A6FE00AC6152 /* Chat.storyboard */; };
 		74AC1B801F77A76500AC6152 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */; };
 		74AC1B821F77A78500AC6152 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B811F77A78500AC6152 /* Media.xcassets */; };
 		74BD17F71F8A307E00783280 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD17F61F8A307E00783280 /* ConversationTableViewCell.swift */; };
 		74BD17FB1F8A7B5C00783280 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD17FA1F8A7B5C00783280 /* ConversationsListViewController.swift */; };
 		74BD17FF1F8AA2DC00783280 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD17FE1F8AA2DC00783280 /* ConversationViewController.swift */; };
 		74BD18041F8ADDAD00783280 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD18031F8ADD0400783280 /* MessageTableViewCell.swift */; };
-		74BE69801F9397710038CB12 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BE697F1F9397710038CB12 /* OperationDataManager.swift */; };
-		74BE69821F93E6770038CB12 /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BE69811F93E6770038CB12 /* DataManagerProtocol.swift */; };
-		74BE69841F93ED340038CB12 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BE69831F93ED340038CB12 /* GCDDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		744A27B51FA895F000D71AFE /* ProfileAssebly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssebly.swift; sourceTree = "<group>"; };
+		744A27B71FA89BFB00D71AFE /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		745A788A1F9B429900C16206 /* MultipeerCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerCommunicator.swift; sourceTree = "<group>"; };
-		745A788C1F9B530700C16206 /* CommunicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
 		745A81071F781B350069D54A /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		745D47661FA7174E00457F70 /* ConversationAssebly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationAssebly.swift; sourceTree = "<group>"; };
+		745D47681FA7178300457F70 /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		745D476C1FA7ADA200457F70 /* ConversationsList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationsList.storyboard; sourceTree = "<group>"; };
+		745D476E1FA7AEC300457F70 /* Conversation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversation.storyboard; sourceTree = "<group>"; };
+		746E930A1FA8671C00C4C7C6 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		746E930C1FA8684E00C4C7C6 /* GCDTasker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDTasker.swift; sourceTree = "<group>"; };
+		746E930E1FA869D000C4C7C6 /* OperationTasker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationTasker.swift; sourceTree = "<group>"; };
+		746E93101FA86D4400C4C7C6 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
+		746E93121FA884BA00C4C7C6 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		7470BFEB1FA632E900F606D6 /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
+		7470BFF31FA644B600F606D6 /* CommunicatonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicatonService.swift; sourceTree = "<group>"; };
+		7470BFF51FA6559400F606D6 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
+		7470BFF71FA6641200F606D6 /* ConversationsPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsPreviewModel.swift; sourceTree = "<group>"; };
 		749EB0871F7EBF670034E38F /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		74AC1B651F7700B400AC6152 /* Fintech Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fintech Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74AC1B681F7700B400AC6152 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,16 +62,12 @@
 		74AC1B721F7700B400AC6152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74AC1B751F7700B400AC6152 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74AC1B771F7700B400AC6152 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74AC1B7D1F77A6FE00AC6152 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		74AC1B811F77A78500AC6152 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		74BD17F61F8A307E00783280 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		74BD17FA1F8A7B5C00783280 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		74BD17FE1F8AA2DC00783280 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		74BD18031F8ADD0400783280 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
-		74BE697F1F9397710038CB12 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
-		74BE69811F93E6770038CB12 /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
-		74BE69831F93ED340038CB12 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +81,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		745C27031FA605A600F051BA /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				745C27041FA605E000F051BA /* Modules */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		745C27041FA605E000F051BA /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				74BE69861F94065C0038CB12 /* Profile */,
+				74BD18071F8ADE3500783280 /* Conversations List */,
+				74BD18061F8ADE1600783280 /* Conversation */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		745C27051FA6066400F051BA /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				7470BFF31FA644B600F606D6 /* CommunicatonService.swift */,
+				746E930A1FA8671C00C4C7C6 /* DataService.swift */,
+			);
+			path = ServiceLayer;
+			sourceTree = "<group>";
+		};
+		745C27061FA6067200F051BA /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+				746E93141FA88E7400C4C7C6 /* BackgroundTasking */,
+				7470BFEE1FA636EE00F606D6 /* DataManagement */,
+				7470BFED1FA636CC00F606D6 /* Communication */,
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		746E93141FA88E7400C4C7C6 /* BackgroundTasking */ = {
+			isa = PBXGroup;
+			children = (
+				746E930C1FA8684E00C4C7C6 /* GCDTasker.swift */,
+				746E930E1FA869D000C4C7C6 /* OperationTasker.swift */,
+			);
+			path = BackgroundTasking;
+			sourceTree = "<group>";
+		};
+		7470BFED1FA636CC00F606D6 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				745A788A1F9B429900C16206 /* MultipeerCommunicator.swift */,
+			);
+			path = Communication;
+			sourceTree = "<group>";
+		};
+		7470BFEE1FA636EE00F606D6 /* DataManagement */ = {
+			isa = PBXGroup;
+			children = (
+				746E93101FA86D4400C4C7C6 /* FileStorage.swift */,
+			);
+			path = DataManagement;
+			sourceTree = "<group>";
+		};
 		74AC1B5C1F7700B400AC6152 = {
 			isa = PBXGroup;
 			children = (
@@ -81,15 +163,13 @@
 			isa = PBXGroup;
 			children = (
 				74AC1B771F7700B400AC6152 /* Info.plist */,
-				74AC1B7D1F77A6FE00AC6152 /* Chat.storyboard */,
 				74BD18091F8ADF2700783280 /* Asset Catalogs */,
-				74BD18051F8ADDDE00783280 /* UI Rounded */,
-				74BD18071F8ADE3500783280 /* Conversations List */,
-				74BD18061F8ADE1600783280 /* Conversation */,
 				74BD18081F8ADE8A00783280 /* Suppoarting Files */,
-				74BE69861F94065C0038CB12 /* Profile */,
-				745A788A1F9B429900C16206 /* MultipeerCommunicator.swift */,
-				745A788C1F9B530700C16206 /* CommunicationManager.swift */,
+				745C27031FA605A600F051BA /* PresentationLayer */,
+				745C27051FA6066400F051BA /* ServiceLayer */,
+				745C27061FA6067200F051BA /* CoreLayer */,
+				7470BFEB1FA632E900F606D6 /* RootAssembly.swift */,
+				74AC1B681F7700B400AC6152 /* AppDelegate.swift */,
 			);
 			path = "Fintech Chat";
 			sourceTree = "<group>";
@@ -108,6 +188,9 @@
 			children = (
 				74BD17FE1F8AA2DC00783280 /* ConversationViewController.swift */,
 				74BD18031F8ADD0400783280 /* MessageTableViewCell.swift */,
+				745D47661FA7174E00457F70 /* ConversationAssebly.swift */,
+				745D47681FA7178300457F70 /* ConversationModel.swift */,
+				745D476E1FA7AEC300457F70 /* Conversation.storyboard */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -117,6 +200,9 @@
 			children = (
 				74BD17F61F8A307E00783280 /* ConversationTableViewCell.swift */,
 				74BD17FA1F8A7B5C00783280 /* ConversationsListViewController.swift */,
+				7470BFF51FA6559400F606D6 /* ConversationsListAssembly.swift */,
+				7470BFF71FA6641200F606D6 /* ConversationsPreviewModel.swift */,
+				745D476C1FA7ADA200457F70 /* ConversationsList.storyboard */,
 			);
 			path = "Conversations List";
 			sourceTree = "<group>";
@@ -124,7 +210,6 @@
 		74BD18081F8ADE8A00783280 /* Suppoarting Files */ = {
 			isa = PBXGroup;
 			children = (
-				74AC1B681F7700B400AC6152 /* AppDelegate.swift */,
 				74AC1B741F7700B400AC6152 /* LaunchScreen.storyboard */,
 				74AC1B6F1F7700B400AC6152 /* Fintech_Chat.xcdatamodeld */,
 			);
@@ -143,10 +228,11 @@
 		74BE69861F94065C0038CB12 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				74BD18051F8ADDDE00783280 /* UI Rounded */,
 				74AC1B7F1F77A76500AC6152 /* ProfileViewController.swift */,
-				74BE697F1F9397710038CB12 /* OperationDataManager.swift */,
-				74BE69831F93ED340038CB12 /* GCDDataManager.swift */,
-				74BE69811F93E6770038CB12 /* DataManagerProtocol.swift */,
+				746E93121FA884BA00C4C7C6 /* ProfileModel.swift */,
+				744A27B51FA895F000D71AFE /* ProfileAssebly.swift */,
+				744A27B71FA89BFB00D71AFE /* Profile.storyboard */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -210,9 +296,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74AC1B7E1F77A6FE00AC6152 /* Chat.storyboard in Resources */,
+				745D476D1FA7ADA300457F70 /* ConversationsList.storyboard in Resources */,
 				74AC1B761F7700B400AC6152 /* LaunchScreen.storyboard in Resources */,
+				745D476F1FA7AEC300457F70 /* Conversation.storyboard in Resources */,
 				74AC1B821F77A78500AC6152 /* Media.xcassets in Resources */,
+				744A27B81FA89BFB00D71AFE /* Profile.storyboard in Resources */,
 				74AC1B731F7700B400AC6152 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,19 +313,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				74AC1B801F77A76500AC6152 /* ProfileViewController.swift in Sources */,
-				74BE69801F9397710038CB12 /* OperationDataManager.swift in Sources */,
+				745D47671FA7174E00457F70 /* ConversationAssebly.swift in Sources */,
+				746E930D1FA8684E00C4C7C6 /* GCDTasker.swift in Sources */,
+				744A27B61FA895F000D71AFE /* ProfileAssebly.swift in Sources */,
+				7470BFF41FA644B600F606D6 /* CommunicatonService.swift in Sources */,
 				749EB0881F7EBF670034E38F /* RoundedImageView.swift in Sources */,
-				74BE69821F93E6770038CB12 /* DataManagerProtocol.swift in Sources */,
+				745D47691FA7178300457F70 /* ConversationModel.swift in Sources */,
+				7470BFEC1FA632E900F606D6 /* RootAssembly.swift in Sources */,
 				74BD18041F8ADDAD00783280 /* MessageTableViewCell.swift in Sources */,
 				74BD17FF1F8AA2DC00783280 /* ConversationViewController.swift in Sources */,
-				74BE69841F93ED340038CB12 /* GCDDataManager.swift in Sources */,
+				746E93111FA86D4400C4C7C6 /* FileStorage.swift in Sources */,
 				74BD17F71F8A307E00783280 /* ConversationTableViewCell.swift in Sources */,
-				745A788D1F9B530700C16206 /* CommunicationManager.swift in Sources */,
 				745A788B1F9B429900C16206 /* MultipeerCommunicator.swift in Sources */,
+				746E93131FA884BA00C4C7C6 /* ProfileModel.swift in Sources */,
 				74AC1B711F7700B400AC6152 /* Fintech_Chat.xcdatamodeld in Sources */,
+				7470BFF61FA6559400F606D6 /* ConversationsListAssembly.swift in Sources */,
 				74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */,
+				7470BFF81FA6641200F606D6 /* ConversationsPreviewModel.swift in Sources */,
 				74BD17FB1F8A7B5C00783280 /* ConversationsListViewController.swift in Sources */,
+				746E930F1FA869D000C4C7C6 /* OperationTasker.swift in Sources */,
 				745A81081F781B350069D54A /* RoundedButton.swift in Sources */,
+				746E930B1FA8671C00C4C7C6 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

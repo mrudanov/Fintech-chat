@@ -9,10 +9,21 @@
 import Foundation
 import MultipeerConnectivity
 
-protocol Communicator {
+protocol Communicator: class {
     func sendMessage(string: String, to userID: String, completiionHandler: ((_ success: Bool, _ error: Error?) -> ())?)
     weak var delegate: CommunicatorDelegate? {get set}
     var online: Bool {get set}
+    var myId: String {get}
+}
+
+protocol CommunicatorDelegate: class {
+    func didFoundUser(userID: String, userName: String?)
+    func didLostUser(userID: String)
+    
+    func failedToStartBrowsingForUsers(error: Error)
+    func failedToStartAdvertising(error: Error)
+    
+    func didRecieveMessage(text: String, fromUser: String, toUser: String)
 }
 
 class MultipeerCommunicator: NSObject, Communicator {
@@ -23,11 +34,10 @@ class MultipeerCommunicator: NSObject, Communicator {
         let text: String
     }
     
-    var delegate: CommunicatorDelegate?
-    var online: Bool = false {
+    weak var delegate: CommunicatorDelegate?
+    var online: Bool = true {
         didSet{
             if online {
-                print("Did become online")
                 browser.startBrowsingForPeers()
                 advertiser.startAdvertisingPeer()
             } else {
@@ -36,11 +46,16 @@ class MultipeerCommunicator: NSObject, Communicator {
             }
         }
     }
-    let peer: MCPeerID
+    private let peer: MCPeerID
     private let advertiser: MCNearbyServiceAdvertiser
     private let browser: MCNearbyServiceBrowser
     private var sessions: [MCPeerID: MCSession] = [:]
     private var foundPeers: [MCPeerID: String] = [:]
+    var myId: String {
+        get {
+            return peer.displayName
+        }
+    }
     
     init(visibleName: String?) {
         peer = MCPeerID(displayName: String(describing: UIDevice.current.identifierForVendor))
@@ -49,6 +64,8 @@ class MultipeerCommunicator: NSObject, Communicator {
         super.init()
         advertiser.delegate = self
         browser.delegate = self
+        browser.startBrowsingForPeers()
+        advertiser.startAdvertisingPeer()
     }
     
     deinit {
@@ -134,7 +151,7 @@ extension MultipeerCommunicator: MCSessionDelegate {
         default:
             print("Did not connect to session with: \(peerID.displayName)")
             // Try connect again
-            browser.invitePeer(peer, to: session, withContext: nil, timeout: 10)
+            browser.invitePeer(peer, to: session, withContext: nil, timeout: 40)
         }
     }
     
