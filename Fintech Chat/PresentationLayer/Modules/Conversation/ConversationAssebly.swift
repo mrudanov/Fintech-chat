@@ -9,16 +9,22 @@
 import Foundation
 
 class ConversationAssembly {
-    func conversationViewController(service: CommunicationService, userID: String, userName: String) -> ConversationViewController {
-        let model = conversationDataModel(communicationService: service, userID: userID)
+    
+    private let communicationService: CommunicationService
+    
+    init(communicationService: CommunicationService) {
+        self.communicationService = communicationService
+    }
+    
+    func conversationViewController(userID: String, userName: String) -> ConversationViewController {
+        let model = conversationDataModel(communicationService: communicationService, userID: userID)
         let conversationVC = ConversationViewController.initVC(with: model, userID: userID, userName: userName)
         model.delegate = conversationVC
-        service.addDelegate(delegate: model)
+        communicationService.addDelegate(delegate: model)
         return conversationVC
     }
     
     // MARK: - PRIVATE SECTION
-    
     private func conversationDataModel(communicationService: CommunicationService, userID: String) -> ConversationModel {
         return ConversationModel(communicationService: communicationService, contactID: userID)
     }

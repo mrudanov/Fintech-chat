@@ -8,12 +8,6 @@
 
 import UIKit
 
-struct UserInfo {
-    var name: String?
-    var info: String?
-    var image: UIImage?
-}
-
 class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var takePictureButton: RoundedButton!
@@ -22,22 +16,19 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     
-    @IBOutlet weak var saveGCDButton: RoundedButton!
-    @IBOutlet weak var saveOperationButton: RoundedButton!
+    @IBOutlet weak var saveButton: RoundedButton!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var profileImageChanged = false
     private var currentUserInfo: UserInfo?
     
-    private var GCDModel: IProfileModel?
-    private var operationModel: IProfileModel?
+    private var model: IProfileModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        saveOperationButton.isEnabled = false
-        saveGCDButton.isEnabled = false
+        saveButton.isEnabled = false
         
         // Load saved user data
         loadUserInfo()
@@ -53,10 +44,9 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         takePictureButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     }
     
-    static func initVC(GCDmodel: IProfileModel, operationModel: IProfileModel) -> ProfileViewController {
+    static func initVC(model: IProfileModel) -> ProfileViewController {
         let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
-        profileVC.GCDModel = GCDmodel
-        profileVC.operationModel = operationModel
+        profileVC.model = model
         return profileVC
     }
     
@@ -84,62 +74,51 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     // MARK: - Save and load user data
-    @IBAction func saveWirhGCDPressed(_ sender: RoundedButton) {
-        if GCDModel != nil { saveUserInfo(with: GCDModel!) }
+    @IBAction func saveButtonPressed(_ sender: RoundedButton) {
+         saveUserInfo()
     }
     
-    @IBAction func saveWithOperationPressed(_ sender: RoundedButton) {
-        if operationModel != nil { saveUserInfo(with: operationModel!) }
-    }
-    
-    private func saveUserInfo(with model: IProfileModel) {
+    private func saveUserInfo() {
         perepareToSave()
         guard currentUserInfo != nil else {return}
         activityIndicator.startAnimating()
-        model.saveUserInfo(currentUserInfo!) { [weak self] error in
-            self?.handleSaveReponse(model: model, error: error)
+        model?.saveUserInfo(currentUserInfo!) { [weak self] in
+            self?.handleSaveReponse()
         }
     }
     
     private func perepareToSave() {
         currentUserInfo?.name = nameTextField.text
         currentUserInfo?.info = descriptionTextField.text
-        currentUserInfo?.image = profileImage.image
-        saveGCDButton.isEnabled = false
-        saveOperationButton.isEnabled = false
+        if let image = profileImage.image {
+            currentUserInfo?.image = UIImagePNGRepresentation(image)
+        }
+        saveButton.isEnabled = false
     }
     
-    private func handleSaveReponse(model: IProfileModel, error: Error?) {
+    private func handleSaveReponse() {
         DispatchQueue.main.async { [weak self] in
             self?.activityIndicator.stopAnimating()
-            if error == nil {
-                self?.presentSuccessAlert()
-            } else {
-                self?.presentSaveErrorAlert(model: model)
-            }
+            self?.presentSuccessAlert()
         }
     }
     
-    private func handleLoadReponse(error: Error?, userInfo: UserInfo?) {
+    private func handleLoadReponse(userInfo: UserInfo) {
         DispatchQueue.main.async { [weak self] in
-            if error == nil {
-                self?.currentUserInfo = userInfo
-                self?.nameTextField.text = userInfo?.name
-                self?.descriptionTextField.text = userInfo?.info
-                self?.profileImage.image = userInfo?.image
-                self?.activityIndicator.stopAnimating()
-            } else {
-                self?.currentUserInfo = UserInfo(name: nil, info: nil, image: nil)
-                self?.activityIndicator.stopAnimating()
-                self?.presentLoadErrorAlert()
+            self?.activityIndicator.stopAnimating()
+            self?.currentUserInfo = userInfo
+            self?.nameTextField.text = userInfo.name
+            self?.descriptionTextField.text = userInfo.info
+            if let imageData = userInfo.image {
+                self?.profileImage.image = UIImage(data: imageData)
             }
         }
     }
     
     private func loadUserInfo() {
         activityIndicator.startAnimating()
-        GCDModel?.loadUserInfo() { [weak self] error, userInfo in
-            self?.handleLoadReponse(error: error, userInfo: userInfo)
+        model?.loadUserInfo() { [weak self] userInfo in
+            self?.handleLoadReponse(userInfo: userInfo)
         }
     }
     
@@ -180,24 +159,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         self.present(errorAlertController, animated: true, completion: nil)
     }
     
-    func presentSaveErrorAlert(model: IProfileModel){
-        let errorAlertController = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
-        errorAlertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        errorAlertController.addAction(UIAlertAction(title: "Повторить", style: .default, handler: { [weak self] _ in
-            self?.saveUserInfo(with: model)
-        }))
-        self.present(errorAlertController, animated: true, completion: nil)
-    }
-    
-    func presentLoadErrorAlert(){
-        let errorAlertController = UIAlertController(title: "Ошибка", message: "Не удалось загрузить данные", preferredStyle: .alert)
-        errorAlertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        errorAlertController.addAction(UIAlertAction(title: "Повторить", style: .default, handler: { [weak self] _ in
-            self?.loadUserInfo()
-        }))
-        self.present(errorAlertController, animated: true, completion: nil)
-    }
-    
     func presentSuccessAlert(){
         let alertController = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -213,11 +174,9 @@ extension ProfileViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if currentUserInfo?.name == nameTextField.text && currentUserInfo?.info == descriptionTextField.text && !profileImageChanged {
-            saveGCDButton.isEnabled = false
-            saveOperationButton.isEnabled = false
+            saveButton.isEnabled = false
         } else {
-            saveGCDButton.isEnabled = true
-            saveOperationButton.isEnabled = true
+            saveButton.isEnabled = true
         }
     }
 }
@@ -226,8 +185,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             profileImage.image = image
-            saveGCDButton.isEnabled = true
-            saveOperationButton.isEnabled = true
+            saveButton.isEnabled = true
             profileImageChanged = true
         } else {
             print("Image retrieving error")

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -104,11 +104,11 @@
                                                 <rect key="frame" x="16" y="8" width="343" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXT-v8-HdD" customClass="RoundedButton" customModule="Fintech_Chat" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="161.5" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="aHg-jo-WRJ"/>
                                                         </constraints>
-                                                        <state key="normal" title="GCD">
+                                                        <state key="normal" title="Save">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -123,33 +123,10 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="saveWirhGCDPressed:" destination="UB0-o8-ZBA" eventType="touchUpInside" id="Ys6-gq-doa"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="798-6W-ppn" customClass="RoundedButton" customModule="Fintech_Chat" customModuleProvider="target">
-                                                        <rect key="frame" x="181.5" y="0.0" width="161.5" height="40"/>
-                                                        <state key="normal" title="Operation">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="1"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="saveWithOperationPressed:" destination="UB0-o8-ZBA" eventType="touchUpInside" id="D3k-h4-Wzb"/>
+                                                            <action selector="saveButtonPressed:" destination="UB0-o8-ZBA" eventType="touchUpInside" id="2we-52-kD9"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="798-6W-ppn" firstAttribute="height" secondItem="aXT-v8-HdD" secondAttribute="height" id="ZPR-wR-zDP"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -184,8 +161,7 @@
                         <outlet property="descriptionTextField" destination="Y9i-jG-1WS" id="tMM-b0-dBd"/>
                         <outlet property="nameTextField" destination="HYC-Fv-097" id="jZ9-QJ-x3F"/>
                         <outlet property="profileImage" destination="F4x-iH-Qg3" id="i55-8i-LKn"/>
-                        <outlet property="saveGCDButton" destination="aXT-v8-HdD" id="N94-dA-Oha"/>
-                        <outlet property="saveOperationButton" destination="798-6W-ppn" id="OsZ-XE-Qja"/>
+                        <outlet property="saveButton" destination="aXT-v8-HdD" id="3rH-7H-GgK"/>
                         <outlet property="takePictureButton" destination="cur-oG-KnN" id="DUf-Wm-p79"/>
                     </connections>
                 </viewController>

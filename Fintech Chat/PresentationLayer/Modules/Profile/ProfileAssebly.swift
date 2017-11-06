@@ -11,6 +11,12 @@ import UIKit
 
 class ProfileAssembly {
     
+    private let storageManager: IStorageManager
+    
+    init(storageManager: IStorageManager) {
+        self.storageManager = storageManager
+    }
+    
     func embededInNavProfileVC() -> UINavigationController {
         let navigationController = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileNavigation") as! UINavigationController
         navigationController.viewControllers[0] = profileViewController()
@@ -18,28 +24,16 @@ class ProfileAssembly {
     }
     
     // MARK: - PRIVATE SECTION
-    
     private func profileViewController() -> ProfileViewController {
-        let GCDtasker: Tasker = GCDTasker()
-        let operationTasker: Tasker = OperationTasker()
+        let model = profileDataModel(storageManager: storageManager)
         
-        let GCDModel = profileDataModel(tasker: GCDtasker)
-        let operationModel = profileDataModel(tasker: operationTasker)
-        
-        let profileVC = ProfileViewController.initVC(GCDmodel: GCDModel, operationModel: operationModel)
+        let profileVC = ProfileViewController.initVC(model: model)
         
         return profileVC
     }
     
-    private func profileDataModel(tasker: Tasker) -> IProfileModel {
-        return ProfileModel(dataService: dataService(tasker: tasker))
+    private func profileDataModel(storageManager: IStorageManager) -> IProfileModel {
+        return ProfileModel(storageManager: storageManager)
     }
     
-    private func dataService(tasker: Tasker) -> DataSerivce {
-        return DataManager(tasker: tasker, storage: storage())
-    }
-    
-    private func storage() -> Storage {
-        return FileStorage()
-    }
 }
