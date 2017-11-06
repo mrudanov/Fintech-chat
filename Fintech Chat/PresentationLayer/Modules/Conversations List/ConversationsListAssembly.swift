@@ -11,9 +11,15 @@ import UIKit
 
 class ConversationsListAssembly {
     
-    func embededInNavProfileVC(service: CommunicationService) -> UINavigationController {
+    private let communicationService: CommunicationService
+    
+    init(communicationService: CommunicationService) {
+        self.communicationService = communicationService
+    }
+    
+    func embededInNavProfileVC() -> UINavigationController {
         let navigationController = UIStoryboard(name: "ConversationsList", bundle: nil).instantiateViewController(withIdentifier: "ConversationsNavigation") as! UINavigationController
-        navigationController.viewControllers[0] = conversationsListViewController(service: service)
+        navigationController.viewControllers[0] = conversationsListViewController(service: communicationService)
         return navigationController
     }
     

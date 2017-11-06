@@ -37,9 +37,8 @@ class ConversationsListViewController: UIViewController {
         guard appDelegate != nil else { return }
         
         let conversationAssembly = appDelegate!.rootAssembly.conversationModule
-        let service = appDelegate!.rootAssembly.communicationService
         
-        let destinationVC = conversationAssembly.conversationViewController(service: service, userID: userID, userName: userName)
+        let destinationVC = conversationAssembly.conversationViewController(userID: userID, userName: userName)
         
         show(destinationVC, sender: nil)
     }

@@ -14,6 +14,7 @@ protocol Communicator: class {
     weak var delegate: CommunicatorDelegate? {get set}
     var online: Bool {get set}
     var myId: String {get}
+    func setDisplayName(_ newName: String)
 }
 
 protocol CommunicatorDelegate: class {
@@ -35,7 +36,10 @@ class MultipeerCommunicator: NSObject, Communicator {
     }
     
     weak var delegate: CommunicatorDelegate?
-    var online: Bool = true {
+    
+    private var displayName = String()
+    
+    var online: Bool = false {
         didSet{
             if online {
                 browser.startBrowsingForPeers()
@@ -46,8 +50,9 @@ class MultipeerCommunicator: NSObject, Communicator {
             }
         }
     }
+    
     private let peer: MCPeerID
-    private let advertiser: MCNearbyServiceAdvertiser
+    private var advertiser: MCNearbyServiceAdvertiser
     private let browser: MCNearbyServiceBrowser
     private var sessions: [MCPeerID: MCSession] = [:]
     private var foundPeers: [MCPeerID: String] = [:]
@@ -57,20 +62,24 @@ class MultipeerCommunicator: NSObject, Communicator {
         }
     }
     
-    init(visibleName: String?) {
+    override init() {
         peer = MCPeerID(displayName: String(describing: UIDevice.current.identifierForVendor))
-        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["userName": visibleName ?? "Unknown"], serviceType: "tinkoff-chat")
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["userName": displayName], serviceType: "tinkoff-chat")
         browser = MCNearbyServiceBrowser(peer: peer, serviceType: "tinkoff-chat")
         super.init()
         advertiser.delegate = self
         browser.delegate = self
-        browser.startBrowsingForPeers()
-        advertiser.startAdvertisingPeer()
     }
     
     deinit {
         advertiser.stopAdvertisingPeer()
         browser.stopBrowsingForPeers()
+    }
+    
+    func setDisplayName(_ newName: String) {
+        advertiser.stopAdvertisingPeer()
+        advertiser = MCNearbyServiceAdvertiser(peer: peer, discoveryInfo: ["userName": newName], serviceType: "tinkoff-chat")
+        advertiser.delegate = self
     }
     
     func sendMessage(string: String, to userID: String, completiionHandler: ((Bool, Error?) -> ())?) {
@@ -105,10 +114,14 @@ extension MultipeerCommunicator: MCNearbyServiceAdvertiserDelegate {
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         print("Recieved invitation from peer: \(peerID.displayName)")
-        let newSession = sessions[peerID] ?? MCSession(peer: peer, securityIdentity: nil, encryptionPreference: .none)
-        sessions[peerID] = newSession
-        newSession.delegate = self
-        invitationHandler(true, newSession)
+        if let session = sessions[peerID] {
+            invitationHandler(false, session)
+        } else {
+            let newSession = MCSession(peer: peer, securityIdentity: nil, encryptionPreference: .none)
+            sessions[peerID] = newSession
+            newSession.delegate = self
+            invitationHandler(true, newSession)
+        }
     }
 }
 

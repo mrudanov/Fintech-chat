@@ -9,15 +9,30 @@
 import Foundation
 
 class RootAssembly {
-    private let communicator: Communicator
-    var communicationService: CommunicationService
-    var conversationsListModule: ConversationsListAssembly = ConversationsListAssembly()
-    var conversationModule: ConversationAssembly = ConversationAssembly()
-    var profileModule: ProfileAssembly = ProfileAssembly()
+    private let communicationService: CommunicationService
+    private let storageManager: IStorageManager
+    
+    let conversationsListModule: ConversationsListAssembly
+    let conversationModule: ConversationAssembly
+    let profileModule: ProfileAssembly
     
     init() {
-        communicator = MultipeerCommunicator(visibleName: UserDefaults.standard.string(forKey: "DiscoveryName"))
+        let coreDataStack: ICoreDataStack = CoreDataStack()
+        storageManager = StorageManager(coreDataStack: coreDataStack)
+        
+        let communicator: Communicator = MultipeerCommunicator()
         communicationService = CommunicationManager(communicator: communicator)
         communicator.delegate = communicationService as? CommunicatorDelegate
+        
+        storageManager.getAppUserInfo() { [weak communicator] userInfo in
+            if let name = userInfo.name {
+                communicator?.setDisplayName(name)
+            }
+            communicator?.online = true
+        }
+        
+        profileModule = ProfileAssembly(storageManager: storageManager)
+        conversationsListModule = ConversationsListAssembly(communicationService: communicationService)
+        conversationModule = ConversationAssembly(communicationService: communicationService)
     }
 }
