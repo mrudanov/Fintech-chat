@@ -22,8 +22,10 @@ class StorageManager: IStorageManager {
         guard let saveContext = coreDataStack.saveContext else {
             assert(false, "No save context!")
         }
-        _ = AppUser.findOrInsertAppUser(in: saveContext)
-        coreDataStack.performSave(context: saveContext, completionHandler: nil)
+        saveContext.perform {
+            _ = AppUser.findOrInsertAppUser(in: saveContext)
+            coreDataStack.performSave(context: saveContext, completionHandler: nil)
+        }
     }
     
     public func updateAppUserInfo(userInfo: UserInfo, completionHandler: (()->Void)? ) {
@@ -31,13 +33,11 @@ class StorageManager: IStorageManager {
             assert(false, "No save context!")
         }
         
-        saveContext.perform { [weak self] in
+        saveContext.perform {
             let appUser = AppUser.findOrInsertAppUser(in: saveContext)
             appUser?.currentUser?.name = userInfo.name
             appUser?.currentUser?.info = userInfo.info
             appUser?.currentUser?.image = userInfo.image
-            
-            self?.coreDataStack.performSave(context: saveContext, completionHandler: completionHandler)
         }
     }
     
