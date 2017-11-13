@@ -11,29 +11,34 @@ import UIKit
 
 class ConversationsListAssembly {
     
-    private let communicationService: CommunicationService
+    private let communicator: Communicator
+    private let coreDataStack: ICoreDataStack
     
-    init(communicationService: CommunicationService) {
-        self.communicationService = communicationService
+    init(communicator: Communicator, coreDataStack: ICoreDataStack) {
+        self.communicator = communicator
+        self.coreDataStack = coreDataStack
     }
     
     func embededInNavProfileVC() -> UINavigationController {
         let navigationController = UIStoryboard(name: "ConversationsList", bundle: nil).instantiateViewController(withIdentifier: "ConversationsNavigation") as! UINavigationController
-        navigationController.viewControllers[0] = conversationsListViewController(service: communicationService)
+        navigationController.viewControllers[0] = conversationsListViewController(communicator: communicator, coreDataStack: coreDataStack)
         return navigationController
     }
     
     // MARK: - PRIVATE SECTION
-    
-    private func conversationsListViewController(service: CommunicationService) -> ConversationsListViewController {
-        let model = previewDataModel(communicationService: service)
+    private func conversationsListViewController(communicator: Communicator, coreDataStack: ICoreDataStack) -> ConversationsListViewController {
+        let service = conversationPreviewsService(coreDataStack: coreDataStack)
+        let model = tableDataSource(conversationService: service)
         let communicationListVC = ConversationsListViewController.initVC(with: model)
-        model.delegate = communicationListVC
-        service.addDelegate(delegate: model)
+        service.FRCDelegate = model
+        communicator.delegate = service
         return communicationListVC
     }
     
-    private func previewDataModel(communicationService: CommunicationService) -> ConversationsPreviewModel {
-        return ConversationsPreviewModel(communicationService: communicationService)
+    private func tableDataSource(conversationService: IConversationPreviewsService) -> ConversationsListTableDataSource {
+        return ConversationsListTableDataSource(service: conversationService)
+    }
+    private func conversationPreviewsService(coreDataStack: ICoreDataStack) -> ConversationPreviewsService {
+        return ConversationPreviewsService(coreDataStack: coreDataStack)
     }
 }

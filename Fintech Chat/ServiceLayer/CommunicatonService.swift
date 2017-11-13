@@ -78,7 +78,7 @@ extension CommunicationManager: CommunicatorDelegate {
         print(error.localizedDescription)
     }
     
-    func didRecieveMessage(text: String, fromUser: String, toUser: String) {
+    func didRecieveMessage(text: String, fromUser: String) {
         let recievedDate = Date()
         for delegate in delegates {
             delegate.value?.didRecieveMessage(text: text, date: recievedDate, fromUser: fromUser)

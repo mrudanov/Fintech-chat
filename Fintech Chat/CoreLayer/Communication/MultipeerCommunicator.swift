@@ -13,7 +13,6 @@ protocol Communicator: class {
     func sendMessage(string: String, to userID: String, completiionHandler: ((_ success: Bool, _ error: Error?) -> ())?)
     weak var delegate: CommunicatorDelegate? {get set}
     var online: Bool {get set}
-    var myId: String {get}
     func setDisplayName(_ newName: String)
 }
 
@@ -24,12 +23,12 @@ protocol CommunicatorDelegate: class {
     func failedToStartBrowsingForUsers(error: Error)
     func failedToStartAdvertising(error: Error)
     
-    func didRecieveMessage(text: String, fromUser: String, toUser: String)
+    func didRecieveMessage(text: String, fromUser: String)
 }
 
 class MultipeerCommunicator: NSObject, Communicator {
     
-    struct Message: Codable {
+    struct MessagePackege: Codable {
         let eventType: String
         let messageId: String
         let text: String
@@ -83,7 +82,7 @@ class MultipeerCommunicator: NSObject, Communicator {
     }
     
     func sendMessage(string: String, to userID: String, completiionHandler: ((Bool, Error?) -> ())?) {
-        let messadeToSend = Message(eventType: "TextMessage", messageId: generateMessageID(), text: string)
+        let messadeToSend = MessagePackege(eventType: "TextMessage", messageId: generateMessageID(), text: string)
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(messadeToSend)
@@ -115,7 +114,12 @@ extension MultipeerCommunicator: MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         print("Recieved invitation from peer: \(peerID.displayName)")
         if let session = sessions[peerID] {
-            invitationHandler(false, session)
+            if session.connectedPeers.contains(peerID) {
+                invitationHandler(false, session)
+                return
+            } else {
+                invitationHandler(true, session)
+            }
         } else {
             let newSession = MCSession(peer: peer, securityIdentity: nil, encryptionPreference: .none)
             sessions[peerID] = newSession
@@ -163,16 +167,14 @@ extension MultipeerCommunicator: MCSessionDelegate {
             print("Connecting  with: \(peerID.displayName)")
         default:
             print("Did not connect to session with: \(peerID.displayName)")
-            // Try connect again
-            browser.invitePeer(peer, to: session, withContext: nil, timeout: 40)
         }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         let decoder = JSONDecoder()
-        let message = try? decoder.decode(Message.self, from: data)
+        let message = try? decoder.decode(MessagePackege.self, from: data)
         if let unwrapedMessage = message {
-            delegate?.didRecieveMessage(text: unwrapedMessage.text, fromUser: peerID.displayName, toUser: peer.displayName)
+            delegate?.didRecieveMessage(text: unwrapedMessage.text, fromUser: peerID.displayName)
         } else {
             print("Can`t decode recieved message")
         }

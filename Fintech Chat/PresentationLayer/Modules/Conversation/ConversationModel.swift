@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Message {
+enum MessagePresentation {
     case input(String)
     case output(String)
 }
@@ -16,7 +16,7 @@ enum Message {
 protocol ConversationDataModel {
     weak var delegate: ConversationDataModelDelegate? {get set}
     func getMessagesCount() -> Int
-    func getMessage(atIndex: Int) -> Message
+    func getMessage(atIndex: Int) -> MessagePresentation
     func sendMessage(text: String, to userID: String) -> Void
 }
 
@@ -27,7 +27,7 @@ protocol ConversationDataModelDelegate: class {
 
 class ConversationModel: ConversationDataModel {
     
-    var messages: [Message] = [ ]
+    var messages: [MessagePresentation] = [ ]
 
     weak var delegate: ConversationDataModelDelegate?
     private let communicationService: CommunicationService
@@ -44,7 +44,7 @@ class ConversationModel: ConversationDataModel {
         return messages.count
     }
 
-    func getMessage(atIndex: Int) -> Message {
+    func getMessage(atIndex: Int) -> MessagePresentation {
         return messages[atIndex]
     }
     
@@ -59,7 +59,7 @@ class ConversationModel: ConversationDataModel {
 
 extension ConversationModel: CommunicationServiceDelegate {
     func didSendMessage(to: String, date: Date, text: String) {
-        messages.append(Message.output(text))
+        messages.append(MessagePresentation.output(text))
         delegate?.didAddMessage()
     }
     
@@ -69,7 +69,7 @@ extension ConversationModel: CommunicationServiceDelegate {
 
     func didRecieveMessage(text: String, date: Date, fromUser: String) {
         if fromUser == contactID {
-            messages.append(Message.input(text))
+            messages.append(MessagePresentation.input(text))
             delegate?.didAddMessage()
         }
     }

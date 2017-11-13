@@ -39,6 +39,30 @@ extension AppUser {
         return appUser
     }
     
+    static func findAppUser(in context: NSManagedObjectContext) -> AppUser? {
+        guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
+            print("Model is not available in context!")
+            assert(false)
+            return nil
+        }
+        
+        var appUser: AppUser?
+        guard let fetchReguest = AppUser.fetchRequestAppUser(model: model) else {
+            return nil
+        }
+        
+        do {
+            let results = try context.fetch(fetchReguest)
+            if let foundUser = results.first {
+                appUser = foundUser
+            }
+        } catch {
+            print("Failed to fetch AppUser: \(error)")
+        }
+        
+        return appUser
+    }
+    
     static func insertAppUser(in context: NSManagedObjectContext) -> AppUser? {
         if let appUser = NSEntityDescription.insertNewObject(forEntityName: "AppUser", into: context) as? AppUser {
             if appUser.currentUser == nil {

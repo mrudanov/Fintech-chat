@@ -9,30 +9,37 @@
 import Foundation
 
 class RootAssembly {
+    // Убрать
     private let communicationService: CommunicationService
-    private let storageManager: IStorageManager
+    
+    private let communicator: Communicator
+    private let coreDataStack: ICoreDataStack
     
     let conversationsListModule: ConversationsListAssembly
     let conversationModule: ConversationAssembly
     let profileModule: ProfileAssembly
     
     init() {
-        let coreDataStack: ICoreDataStack = CoreDataStack()
-        storageManager = StorageManager(coreDataStack: coreDataStack)
+        coreDataStack = CoreDataStack()
+        let profileService = ProfileService(coreDataStack: coreDataStack)
         
-        let communicator: Communicator = MultipeerCommunicator()
-        communicationService = CommunicationManager(communicator: communicator)
-        communicator.delegate = communicationService as? CommunicatorDelegate
-        
-        storageManager.getAppUserInfo() { [weak communicator] userInfo in
+        communicator = MultipeerCommunicator()
+        profileService.getAppUserInfo() { [weak communicator] userInfo in
             if let name = userInfo.name {
                 communicator?.setDisplayName(name)
             }
             communicator?.online = true
         }
         
-        profileModule = ProfileAssembly(storageManager: storageManager)
-        conversationsListModule = ConversationsListAssembly(communicationService: communicationService)
+        
+        // Убрать
+        communicationService = CommunicationManager(communicator: communicator)
+        communicator.delegate = communicationService as? CommunicatorDelegate
+        
+        
+        
+        profileModule = ProfileAssembly(profileService: profileService)
+        conversationsListModule = ConversationsListAssembly(communicator: communicator, coreDataStack: coreDataStack)
         conversationModule = ConversationAssembly(communicationService: communicationService)
     }
 }
