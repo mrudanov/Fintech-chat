@@ -32,6 +32,10 @@
         <relationship name="sentMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="sender" inverseEntity="Message" syncable="YES"/>
     </entity>
     <fetchRequest name="AppUser" entity="AppUser"/>
+    <fetchRequest name="ConversationWithId" entity="Conversation" predicateString="conversationId == &quot;$Id&quot;"/>
+    <fetchRequest name="NotEmptyConversationsWithOnlineUser" entity="Conversation" predicateString="messages.@count != 0 AND with.isOnline == 1"/>
+    <fetchRequest name="OnlineUsers" entity="User" predicateString="isOnline == 1"/>
+    <fetchRequest name="UserWithId" entity="User" predicateString="userId CONTAINS &quot;$Id&quot;"/>
     <elements>
         <element name="AppUser" positionX="-405" positionY="-117" width="128" height="60"/>
         <element name="Conversation" positionX="-38" positionY="-135" width="128" height="120"/>

@@ -30,10 +30,10 @@ extension User {
         }
         
         var user: User?
-        let fetchReguest = User.fetchRequestUserWithId(id, model: model)
+        let fetchRequest = User.fetchRequestUserWithId(id, model: model)
         
         do {
-            let results = try context.fetch(fetchReguest)
+            let results = try context.fetch(fetchRequest)
             if let foundUser = results.first {
                 user = foundUser
             }
@@ -84,10 +84,16 @@ extension User {
         return fetchRequest
     }
     
+    static func fetchRequestOnlineUsers(model: NSManagedObjectModel) -> NSFetchRequest<User> {
+        let fetchRequest: NSFetchRequest<User> = NSFetchRequest(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "isOnline == 1")
+        return fetchRequest
+    }
+    
     
     static func fetchRequestUserOnlineOrWithConversation(model: NSManagedObjectModel) -> NSFetchRequest<User> {
         let fetchRequest: NSFetchRequest<User> = NSFetchRequest(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "(isOnline == 1) OR (conversation != nil)")
+        fetchRequest.predicate = NSPredicate(format: "((isOnline == 1) OR (conversation != nil)) AND (currentAppUser == nil)")
         let firstSortDescriptor = NSSortDescriptor(key: #keyPath(User.isOnline), ascending: false)
         let secondSortDescriptor = NSSortDescriptor(key: #keyPath(User.conversation.lastMessage.date), ascending: false)
         let thirdSortDescriptor = NSSortDescriptor(key: #keyPath(User.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))

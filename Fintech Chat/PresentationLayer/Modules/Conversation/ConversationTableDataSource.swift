@@ -1,102 +1,99 @@
-////
-////  ConversationTableDataSource.swift
-////  Fintech Chat
-////
-////  Created by Mikhail Rudanov on 12/11/2017.
-////  Copyright © 2017 Mikhail Rudanov. All rights reserved.
-////
 //
-//import Foundation
-//import UIKit
-//import CoreData
+//  ConversationTableDataSource.swift
+//  Fintech Chat
 //
-//protocol ConversationTableDataSourceDelegate: class {
-//    func deleteRow(at: IndexPath) -> Void
-//    func insertRow(at: IndexPath) -> Void
-//    func updateRow(at: IndexPath) -> Void
-//    func beginUpdates() -> Void
-//    func endUpdates() -> Void
-//}
+//  Created by Mikhail Rudanov on 12/11/2017.
+//  Copyright © 2017 Mikhail Rudanov. All rights reserved.
 //
-//class ConversationTableDataSource: NSObject, UITableViewDataSource {
-//    private let service: IConversationPreviewsService
-//    weak var delegate: ConversationsListTableDataSourceDelegate?
-//
-//    init(service: IConversationPreviewsService) {
-//        self.service = service
-//    }
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return service.numberOfSections()
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return service.numberOfRowsInSections(section)
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath)
-//
-//        let message = service.objectForRowAt(indexPath: indexPath)
-//
-//        return prepareCell(cell, with: user)
-//    }
-//
-//    private func prepareCell(_ cell: UITableViewCell ,with message: Massage) -> UITableViewCell {
-//        if let conversationCell = cell as? ConversationTableViewCell {
-//            conversationCell.name = user.name
-//            conversationCell.message = user.conversation?.lastMessage?.text
-//            conversationCell.date = user.conversation?.lastMessage?.date
-//            conversationCell.online = user.isOnline
-//            conversationCell.updateCellUI()
-//            if let count = user.conversation?.unreadMessages?.count {
-//                conversationCell.hasUnreadMessages = count != 0
-//            } else {
-//                conversationCell.hasUnreadMessages = false
-//            }
-//        }
-//
-//        return cell
-//    }
-//
-//    public func getObjectForRowAt(indexPath: IndexPath) -> User {
-//        return service.objectForRowAt(indexPath: indexPath)
-//    }
-//
-//}
-//
-//extension ConversationTableDataSource: NSFetchedResultsControllerDelegate {
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        print("Object changed.")
-//        switch type {
-//        case .delete:
-//            if let indexPath = indexPath {
-//                delegate?.deleteRow(at: indexPath)
-//            }
-//        case .insert:
-//            if let newIndexPath = newIndexPath {
-//                delegate?.insertRow(at: newIndexPath)
-//            }
-//        case .move:
-//            if let indexPath = indexPath {
-//                delegate?.deleteRow(at: indexPath)
-//            }
-//            if let newIndexPath = newIndexPath {
-//                delegate?.insertRow(at: newIndexPath)
-//            }
-//        case .update:
-//            if let indexPath = indexPath {
-//                delegate?.updateRow(at: indexPath)
-//            }
-//        }
-//    }
-//
-//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        delegate?.beginUpdates()
-//    }
-//
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        delegate?.endUpdates()
-//    }
-//}
+
+import Foundation
+import UIKit
+import CoreData
+
+protocol ConversationTableDataSourceDelegate: class {
+    func deleteRow(at: IndexPath) -> Void
+    func insertRow(at: IndexPath) -> Void
+    func updateRow(at: IndexPath) -> Void
+    func beginUpdates() -> Void
+    func endUpdates() -> Void
+    func prerapeCell(with message: Message, at indexPath: IndexPath) -> UITableViewCell
+}
+
+protocol IConversationTableModel {
+    weak var delegate: ConversationTableDataSourceDelegate? {get set}
+    func sendMessage(text: String, to: String, completiionHandler: ((Bool, Error?) -> ())?)
+}
+
+typealias IConversationTableDataSource = IConversationTableModel & UITableViewDataSource
+
+class ConversationTableDataSource: NSObject, IConversationTableDataSource {
+    private let service: IConversationService
+    weak var delegate: ConversationTableDataSourceDelegate?
+    private let userId: String
+
+    init(userId: String, conversationService: IConversationService) {
+        service = conversationService
+        self.userId = userId
+        super.init()
+        service.delegate = self
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return service.numberOfRowsInSections(section)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = service.objectForRowAt(indexPath: indexPath)
+        return delegate?.prerapeCell(with: message, at: indexPath) ?? UITableViewCell()
+        
+    }
+    
+    public func sendMessage(text: String, to: String, completiionHandler: ((Bool, Error?) -> ())?) {
+        service.sendMessage(text: text, to: userId, completiionHandler: completiionHandler)
+    }
+
+}
+
+extension ConversationTableDataSource: ConversationsServicesDelegate {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        print("Object at section: \(String(describing: indexPath?.section)), row: \(String(describing: indexPath?.row)) is going to be")
+        switch type {
+        case .delete:
+            print("deleted")
+            if let indexPath = indexPath {
+                delegate?.deleteRow(at: indexPath)
+            }
+        case .insert:
+            print("inserted")
+            if let newIndexPath = newIndexPath {
+                delegate?.insertRow(at: newIndexPath)
+            }
+        case .move:
+            print("moved")
+            if let indexPath = indexPath {
+                delegate?.deleteRow(at: indexPath)
+            }
+            if let newIndexPath = newIndexPath {
+                delegate?.insertRow(at: newIndexPath)
+            }
+        case .update:
+            print("updated")
+            if let indexPath = indexPath {
+                delegate?.updateRow(at: indexPath)
+            }
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        delegate?.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        delegate?.endUpdates()
+    }
+}
 

@@ -11,10 +11,12 @@ import UIKit
 
 class ProfileAssembly {
     
-    private let profileService: IProfileService
+    private let storageManager: StorageManager
+    private let communicationManager: ICommunicationManager
     
-    init(profileService: IProfileService) {
-        self.profileService = profileService
+    init(storageManager: StorageManager, communicationManager: ICommunicationManager) {
+        self.storageManager = storageManager
+        self.communicationManager = communicationManager
     }
     
     func embededInNavProfileVC() -> UINavigationController {
@@ -25,7 +27,8 @@ class ProfileAssembly {
     
     // MARK: - PRIVATE SECTION
     private func profileViewController() -> ProfileViewController {
-        let model = profileDataModel(profileService: profileService)
+        let service = profileService(storageManager: storageManager, communicationManager: communicationManager)
+        let model = profileDataModel(profileService: service)
         
         let profileVC = ProfileViewController.initVC(model: model)
         
@@ -34,6 +37,10 @@ class ProfileAssembly {
     
     private func profileDataModel(profileService: IProfileService) -> IProfileModel {
         return ProfileModel(profileService: profileService)
+    }
+    
+    private func profileService(storageManager: StorageManager, communicationManager: ICommunicationManager) -> IProfileService {
+        return ProfileService(storageManager: storageManager, communicationManager: communicationManager)
     }
     
 }

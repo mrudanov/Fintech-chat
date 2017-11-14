@@ -11,7 +11,7 @@ import UIKit
 
 protocol IProfileModel {
     func saveUserInfo(_ userInfo: UIUserInfo, completion: @escaping () -> (Void))
-    func loadUserInfo(completionHandler: ((UIUserInfo)->Void)?)
+    func loadUserInfo() -> UIUserInfo
 }
 
 struct UserInfo {
@@ -33,13 +33,13 @@ class ProfileModel: IProfileModel {
         profileService.updateAppUserInfo(userInfo: infoToSave, completionHandler: completion)
     }
     
-    func loadUserInfo(completionHandler: ((UIUserInfo)->Void)?) {
-        return profileService.getAppUserInfo { userInfo in
-            var uiUserInfo = UIUserInfo(name: userInfo.name, info: userInfo.info, image: nil)
-            if let imageData = userInfo.image {
-                uiUserInfo.image = UIImage(data: imageData)
-            }
-            completionHandler?(uiUserInfo)
+    func loadUserInfo() -> UIUserInfo {
+        let userInfo = profileService.getAppUserInfo()
+        var uiUserInfo = UIUserInfo(name: userInfo.name, info: userInfo.info, image: nil)
+        if let imageData = userInfo.image {
+            uiUserInfo.image = UIImage(data: imageData)
         }
+        
+        return uiUserInfo
     }
 }

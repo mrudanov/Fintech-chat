@@ -27,4 +27,12 @@ extension Message {
         let string = "\(arc4random_uniform(UINT32_MAX))+\(Date.timeIntervalSinceReferenceDate)+\(arc4random_uniform(UINT32_MAX))".data(using: .utf8)?.base64EncodedString()
         return string!
     }
+    
+    static func fetchRequestMessagesFromDialogWithUser(_ id: String, model: NSManagedObjectModel) -> NSFetchRequest<Message> {
+        let fetchRequest: NSFetchRequest<Message> = NSFetchRequest(entityName: "Message")
+        fetchRequest.predicate = NSPredicate(format: "(\(#keyPath(Message.reciever.userId)) == %@) OR (\(#keyPath(Message.sender.userId)) == %@)", id, id)
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(Message.date), ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        return fetchRequest
+    }
 }

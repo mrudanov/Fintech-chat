@@ -9,37 +9,79 @@
 import Foundation
 
 class RootAssembly {
-    // Убрать
-    private let communicationService: CommunicationService
     
-    private let communicator: Communicator
-    private let coreDataStack: ICoreDataStack
-    
-    let conversationsListModule: ConversationsListAssembly
-    let conversationModule: ConversationAssembly
-    let profileModule: ProfileAssembly
-    
-    init() {
-        coreDataStack = CoreDataStack()
-        let profileService = ProfileService(coreDataStack: coreDataStack)
-        
-        communicator = MultipeerCommunicator()
-        profileService.getAppUserInfo() { [weak communicator] userInfo in
-            if let name = userInfo.name {
-                communicator?.setDisplayName(name)
+    private var _coreDataStack: ICoreDataStack?
+    private var coreDataStack: ICoreDataStack {
+        get {
+            if _coreDataStack == nil {
+                _coreDataStack = CoreDataStack()
             }
-            communicator?.online = true
+            return _coreDataStack!
         }
-        
-        
-        // Убрать
-        communicationService = CommunicationManager(communicator: communicator)
-        communicator.delegate = communicationService as? CommunicatorDelegate
-        
-        
-        
-        profileModule = ProfileAssembly(profileService: profileService)
-        conversationsListModule = ConversationsListAssembly(communicator: communicator, coreDataStack: coreDataStack)
-        conversationModule = ConversationAssembly(communicationService: communicationService)
+    }
+    
+    private var _storageManager: StorageManager?
+    private var storageManager: StorageManager {
+        get {
+            if _storageManager == nil {
+                _storageManager = CoreDataStorageManager(coreDataStack: coreDataStack)
+            }
+            return _storageManager!
+        }
+    }
+    
+    private var _communicationManager: ICommunicationManager?
+    private var communicationManager: ICommunicationManager {
+        get {
+            if _communicationManager == nil {
+                _communicationManager = CommunicationManager(storageManager: storageManager)
+                _communicationManager?.online = true
+            }
+            
+            return _communicationManager!
+        }
+    }
+    
+    
+    private var _conversationsListModule: ConversationsListAssembly?
+    public var conversationsListModule: ConversationsListAssembly {
+        get {
+            if _conversationsListModule == nil {
+                _conversationsListModule = ConversationsListAssembly(storageManager: storageManager)
+            }
+            
+            return _conversationsListModule!
+        }
+    }
+    
+    private var _conversationModule: ConversationAssembly?
+    public var conversationModule: ConversationAssembly {
+        get {
+            if _conversationModule == nil {
+                _conversationModule = ConversationAssembly(storageManager: storageManager, communicationManager: communicationManager)
+            }
+            
+            return _conversationModule!
+        }
+    }
+    
+    private var _profileModule: ProfileAssembly?
+    public var profileModule: ProfileAssembly {
+        get {
+            if _profileModule == nil {
+                _profileModule = ProfileAssembly(storageManager: storageManager, communicationManager: communicationManager)
+            }
+            
+            return _profileModule!
+        }
+    }
+    
+    public func turnOffCommunicator() {
+        communicationManager.online = false
+        storageManager.setAllUsersOffline()
+    }
+    
+    public func turnOnCommunicator() {
+        communicationManager.online = true
     }
 }

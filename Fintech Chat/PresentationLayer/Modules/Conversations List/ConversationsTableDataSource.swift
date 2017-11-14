@@ -18,14 +18,25 @@ protocol ConversationsListTableDataSourceDelegate: class {
     func endUpdates() -> Void
     func deleteSection(sectionIndex: Int) -> Void
     func insertSection(sectionIndex: Int) -> Void
+    func prepareCell(with user: User, at indexPath: IndexPath) -> UITableViewCell
 }
 
-class ConversationsListTableDataSource: NSObject, UITableViewDataSource {
-    private let service: IConversationPreviewsService
+protocol IConversationsListTableModel {
+    weak var delegate: ConversationsListTableDataSourceDelegate? {get set}
+    func getUserForRowAt(indexPath: IndexPath) -> User
+}
+
+typealias IConversationsListTableDataSource = IConversationsListTableModel & UITableViewDataSource
+
+class ConversationsListTableDataSource: NSObject, IConversationsListTableDataSource {
+    
+    private let service: IConversationsPreviewsService
     weak var delegate: ConversationsListTableDataSourceDelegate?
     
-    init(service: IConversationPreviewsService) {
+    init(service: IConversationsPreviewsService) {
         self.service = service
+        super.init()
+        service.delegate = self
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,41 +48,22 @@ class ConversationsListTableDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath)
-        
         let user = service.objectForRowAt(indexPath: indexPath)
         
-        return prepareCell(cell, with: user)
+        return delegate?.prepareCell(with: user, at: indexPath) ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Online" : "History"
+        let serviceTitle = service.titlerForSection(section)
+        return serviceTitle == "1" ? "Online" : "History"
     }
     
-    private func prepareCell(_ cell: UITableViewCell ,with user: User) -> UITableViewCell {
-        if let conversationCell = cell as? ConversationTableViewCell {
-            conversationCell.name = user.name
-            conversationCell.message = user.conversation?.lastMessage?.text
-            conversationCell.date = user.conversation?.lastMessage?.date
-            conversationCell.online = user.isOnline
-            conversationCell.updateCellUI()
-            if let count = user.conversation?.unreadMessages?.count {
-                conversationCell.hasUnreadMessages = count != 0
-            } else {
-                conversationCell.hasUnreadMessages = false
-            }
-        }
-        
-        return cell
-    }
-    
-    public func getObjectForRowAt(indexPath: IndexPath) -> User {
+    public func getUserForRowAt(indexPath: IndexPath) -> User {
         return service.objectForRowAt(indexPath: indexPath)
     }
-    
 }
 
-extension ConversationsListTableDataSource: NSFetchedResultsControllerDelegate {
+extension ConversationsListTableDataSource: ConversationsServicesDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         print("Object at section: \(String(describing: indexPath?.section)), row: \(String(describing: indexPath?.row)) is going to be")
         switch type {

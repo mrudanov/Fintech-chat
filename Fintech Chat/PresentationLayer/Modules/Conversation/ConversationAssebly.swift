@@ -10,22 +10,29 @@ import Foundation
 
 class ConversationAssembly {
     
-    private let communicationService: CommunicationService
+    private let storageManager: StorageManager
+    private let communicationManager: ICommunicationManager
     
-    init(communicationService: CommunicationService) {
-        self.communicationService = communicationService
+    init(storageManager: StorageManager, communicationManager: ICommunicationManager) {
+        self.storageManager = storageManager
+        self.communicationManager = communicationManager
     }
     
     func conversationViewController(userID: String, userName: String) -> ConversationViewController {
-        let model = conversationDataModel(communicationService: communicationService, userID: userID)
+        let service = conversationService(userId: userID, storageManager: storageManager, communicationManager: communicationManager)
+        
+        let model = conversationsListTableDataSource(userId: userID, service: service)
+        
         let conversationVC = ConversationViewController.initVC(with: model, userID: userID, userName: userName)
-        model.delegate = conversationVC
-        communicationService.addDelegate(delegate: model)
         return conversationVC
     }
     
     // MARK: - PRIVATE SECTION
-    private func conversationDataModel(communicationService: CommunicationService, userID: String) -> ConversationModel {
-        return ConversationModel(communicationService: communicationService, contactID: userID)
+    private func conversationService(userId: String, storageManager: StorageManager, communicationManager: ICommunicationManager) -> IConversationService {
+        return ConversationService(userId: userId, storageManager: storageManager, communicationManager: communicationManager)
+    }
+    
+    private func conversationsListTableDataSource(userId: String, service: IConversationService) -> IConversationTableDataSource {
+        return ConversationTableDataSource(userId: userId, conversationService: service)
     }
 }

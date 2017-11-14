@@ -11,11 +11,11 @@ import UIKit
 class ConversationsListViewController: UIViewController {
     
     @IBOutlet weak var conversationsListTableView: UITableView!
-    private var tableDataSource: ConversationsListTableDataSource?
+    private var tableDataSource: IConversationsListTableDataSource?
     
-    static func initVC(with model: ConversationsListTableDataSource) -> ConversationsListViewController {
+    static func initVC(with tableDataSource: IConversationsListTableDataSource) -> ConversationsListViewController {
         let conversationVC = UIStoryboard(name: "ConversationsList", bundle: nil).instantiateViewController(withIdentifier: "ConversationsList") as! ConversationsListViewController
-        conversationVC.tableDataSource = model
+        conversationVC.tableDataSource = tableDataSource
         return conversationVC
     }
     
@@ -54,7 +54,7 @@ extension ConversationsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        let user = tableDataSource?.getObjectForRowAt(indexPath: indexPath)
+        let user = tableDataSource?.getUserForRowAt(indexPath: indexPath)
         if let id = user?.userId {
             navigateToCoversation(with: id, userName: user?.name ?? "Unknown")
         }
@@ -62,6 +62,25 @@ extension ConversationsListViewController: UITableViewDelegate {
 }
 
 extension ConversationsListViewController: ConversationsListTableDataSourceDelegate {
+    func prepareCell(with user: User, at indexPath: IndexPath) -> UITableViewCell {
+        let cell = conversationsListTableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath)
+        
+        if let conversationCell = cell as? ConversationTableViewCell {
+            conversationCell.name = user.name
+            conversationCell.message = user.conversation?.lastMessage?.text
+            conversationCell.date = user.conversation?.lastMessage?.date
+            conversationCell.online = user.isOnline
+            conversationCell.updateCellUI()
+            if let count = user.conversation?.unreadMessages?.count {
+                conversationCell.hasUnreadMessages = count != 0
+            } else {
+                conversationCell.hasUnreadMessages = false
+            }
+        }
+        
+        return cell
+    }
+    
     func deleteSection(sectionIndex: Int) {
         conversationsListTableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
     }

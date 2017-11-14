@@ -23,5 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         return true
     }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        rootAssembly.turnOffCommunicator()
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        rootAssembly.turnOnCommunicator()
+    }
 }
 

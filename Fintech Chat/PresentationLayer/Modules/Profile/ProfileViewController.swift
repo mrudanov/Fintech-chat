@@ -121,8 +121,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     private func loadUserInfo() {
         activityIndicator.startAnimating()
-        model?.loadUserInfo() { [weak self] userInfo in
-            self?.handleLoadReponse(userInfo: userInfo)
+        if let userInfo = model?.loadUserInfo() {
+            handleLoadReponse(userInfo: userInfo)
         }
     }
     

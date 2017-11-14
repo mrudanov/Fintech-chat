@@ -19,12 +19,12 @@ extension AppUser {
         }
         
         var appUser: AppUser?
-        guard let fetchReguest = AppUser.fetchRequestAppUser(model: model) else {
+        guard let fetchRequest = AppUser.fetchRequestAppUser(model: model) else {
             return nil
         }
         
         do {
-            let results = try context.fetch(fetchReguest)
+            let results = try context.fetch(fetchRequest)
             if let foundUser = results.first {
                 appUser = foundUser
             }
@@ -47,12 +47,12 @@ extension AppUser {
         }
         
         var appUser: AppUser?
-        guard let fetchReguest = AppUser.fetchRequestAppUser(model: model) else {
+        guard let fetchRequest = AppUser.fetchRequestAppUser(model: model) else {
             return nil
         }
         
         do {
-            let results = try context.fetch(fetchReguest)
+            let results = try context.fetch(fetchRequest)
             if let foundUser = results.first {
                 appUser = foundUser
             }
