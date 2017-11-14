@@ -9,27 +9,22 @@
 import UIKit
 
 class ConversationsListViewController: UIViewController {
-    struct ConversationPreview {
-        var userID: String
-        var name: String?
-        var message: String?
-        var date: Date?
-        var hasUnreadMessages: Bool
-    }
     
     @IBOutlet weak var conversationsListTableView: UITableView!
+    private var tableDataSource: IConversationsListTableDataSource?
     
-    static func initVC(with model: PreviewModel) -> ConversationsListViewController {
+    static func initVC(with tableDataSource: IConversationsListTableDataSource) -> ConversationsListViewController {
         let conversationVC = UIStoryboard(name: "ConversationsList", bundle: nil).instantiateViewController(withIdentifier: "ConversationsList") as! ConversationsListViewController
-        conversationVC.previewDataModel = model
+        conversationVC.tableDataSource = tableDataSource
         return conversationVC
     }
-    
-    private var previewDataModel: PreviewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        conversationsListTableView.delegate = self
+        conversationsListTableView.dataSource = tableDataSource
+        tableDataSource?.delegate = self
     }
     
     private func navigateToCoversation(with userID: String, userName: String) {
@@ -56,53 +51,61 @@ class ConversationsListViewController: UIViewController {
 }
 
 extension ConversationsListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Online" : "History"
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        let contactName = indexPath.section == 0 ? previewDataModel!.getOnlineUser(atIndex: indexPath.row).name : previewDataModel!.getOfflineUser(atIndex: indexPath.row).name
-        
-        let userID = indexPath.section == 0 ? previewDataModel!.getOnlineUser(atIndex: indexPath.row).userID : previewDataModel!.getOfflineUser(atIndex: indexPath.row).userID
-        navigateToCoversation(with: userID, userName: contactName ?? "Unknown")
+        let user = tableDataSource?.getUserForRowAt(indexPath: indexPath)
+        if let id = user?.userId {
+            navigateToCoversation(with: id, userName: user?.name ?? "Unknown")
+        }
     }
 }
 
-extension ConversationsListViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return previewDataModel?.getOnlineUsersCount() ?? 0
-        } else {
-            return previewDataModel?.getOfflineUsersCount() ?? 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath)
-        let preview = indexPath.section == 0 ? previewDataModel?.getOnlineUser(atIndex: indexPath.row) : previewDataModel?.getOfflineUser(atIndex: indexPath.row)
+extension ConversationsListViewController: ConversationsListTableDataSourceDelegate {
+    func prepareCell(with user: User, at indexPath: IndexPath) -> UITableViewCell {
+        let cell = conversationsListTableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath)
         
         if let conversationCell = cell as? ConversationTableViewCell {
-            conversationCell.name = preview?.name
-            conversationCell.message = preview?.message
-            conversationCell.date = preview?.date
-            conversationCell.online = indexPath.section == 0
-            conversationCell.hasUnreadMessages = preview?.hasUnreadMessages ?? false
+            conversationCell.name = user.name
+            conversationCell.message = user.conversation?.lastMessage?.text
+            conversationCell.date = user.conversation?.lastMessage?.date
+            conversationCell.online = user.isOnline
             conversationCell.updateCellUI()
+            if let count = user.conversation?.unreadMessages?.count {
+                conversationCell.hasUnreadMessages = count != 0
+            } else {
+                conversationCell.hasUnreadMessages = false
+            }
         }
+        
         return cell
     }
-}
-
-extension ConversationsListViewController: PreviewDataModelDelegate {
-    func didUpdatedUsersList() {
-        DispatchQueue.main.async { [weak self] in
-            self?.conversationsListTableView.reloadData()
-        }
+    
+    func deleteSection(sectionIndex: Int) {
+        conversationsListTableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+    }
+    
+    func insertSection(sectionIndex: Int) {
+        conversationsListTableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+    }
+    
+    func beginUpdates() {
+        conversationsListTableView.beginUpdates()
+    }
+    
+    func endUpdates() {
+        conversationsListTableView.endUpdates()
+    }
+    
+    func deleteRow(at indexPath: IndexPath) {
+        conversationsListTableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func insertRow(at indexPath: IndexPath) {
+        conversationsListTableView.insertRows(at: [indexPath], with: .automatic)
+    }
+    
+    func updateRow(at indexPath: IndexPath) {
+        conversationsListTableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
     }
 }

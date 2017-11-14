@@ -10,30 +10,31 @@ import Foundation
 import UIKit
 
 class ConversationsListAssembly {
+    private let storageManager: StorageManager
     
-    private let communicationService: CommunicationService
-    
-    init(communicationService: CommunicationService) {
-        self.communicationService = communicationService
+    init(storageManager: StorageManager) {
+        self.storageManager = storageManager
     }
     
-    func embededInNavProfileVC() -> UINavigationController {
+    public func embededInNavProfileVC() -> UINavigationController {
         let navigationController = UIStoryboard(name: "ConversationsList", bundle: nil).instantiateViewController(withIdentifier: "ConversationsNavigation") as! UINavigationController
-        navigationController.viewControllers[0] = conversationsListViewController(service: communicationService)
+        navigationController.viewControllers[0] = conversationsListViewController()
         return navigationController
     }
     
     // MARK: - PRIVATE SECTION
-    
-    private func conversationsListViewController(service: CommunicationService) -> ConversationsListViewController {
-        let model = previewDataModel(communicationService: service)
+    private func conversationsListViewController() -> ConversationsListViewController {
+        let service = conversationsPreviewsService(storageManager: storageManager)
+        let model = conversationsListTableDataSource(service: service)
         let communicationListVC = ConversationsListViewController.initVC(with: model)
-        model.delegate = communicationListVC
-        service.addDelegate(delegate: model)
         return communicationListVC
     }
     
-    private func previewDataModel(communicationService: CommunicationService) -> ConversationsPreviewModel {
-        return ConversationsPreviewModel(communicationService: communicationService)
+    private func conversationsPreviewsService(storageManager: StorageManager) -> IConversationsPreviewsService {
+        return ConversationsPreviewsService(storageManager: storageManager)
+    }
+    
+    private func conversationsListTableDataSource(service: IConversationsPreviewsService) -> IConversationsListTableDataSource {
+        return ConversationsListTableDataSource(service: service)
     }
 }

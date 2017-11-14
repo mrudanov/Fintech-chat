@@ -8,6 +8,12 @@
 
 import UIKit
 
+struct UIUserInfo {
+    var name: String?
+    var info: String?
+    var image: UIImage?
+}
+
 class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var takePictureButton: RoundedButton!
@@ -21,7 +27,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var profileImageChanged = false
-    private var currentUserInfo: UserInfo?
+    private var currentUserInfo: UIUserInfo?
     
     private var model: IProfileModel?
     
@@ -90,9 +96,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     private func perepareToSave() {
         currentUserInfo?.name = nameTextField.text
         currentUserInfo?.info = descriptionTextField.text
-        if let image = profileImage.image {
-            currentUserInfo?.image = UIImagePNGRepresentation(image)
-        }
+        currentUserInfo?.image = profileImage.image
         saveButton.isEnabled = false
     }
     
@@ -103,22 +107,22 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
-    private func handleLoadReponse(userInfo: UserInfo) {
+    private func handleLoadReponse(userInfo: UIUserInfo) {
         DispatchQueue.main.async { [weak self] in
             self?.activityIndicator.stopAnimating()
             self?.currentUserInfo = userInfo
             self?.nameTextField.text = userInfo.name
             self?.descriptionTextField.text = userInfo.info
-            if let imageData = userInfo.image {
-                self?.profileImage.image = UIImage(data: imageData)
+            if let image = userInfo.image {
+               self?.profileImage.image = image
             }
         }
     }
     
     private func loadUserInfo() {
         activityIndicator.startAnimating()
-        model?.loadUserInfo() { [weak self] userInfo in
-            self?.handleLoadReponse(userInfo: userInfo)
+        if let userInfo = model?.loadUserInfo() {
+            handleLoadReponse(userInfo: userInfo)
         }
     }
     

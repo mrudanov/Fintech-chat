@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol IProfileModel {
-    func saveUserInfo(_ userInfo: UserInfo, completion: @escaping () -> (Void))
-    func loadUserInfo(completionHandler: ((UserInfo)->Void)?)
+    func saveUserInfo(_ userInfo: UIUserInfo, completion: @escaping () -> (Void))
+    func loadUserInfo() -> UIUserInfo
 }
 
 struct UserInfo {
@@ -21,17 +21,25 @@ struct UserInfo {
 }
 
 class ProfileModel: IProfileModel {
-    private let storageManager: IStorageManager
+    private let profileService: IProfileService
     
-    init(storageManager: IStorageManager) {
-        self.storageManager = storageManager
+    init(profileService: IProfileService) {
+        self.profileService = profileService
     }
     
-    func saveUserInfo(_ userInfo: UserInfo, completion: @escaping () -> (Void)) {
-        storageManager.updateAppUserInfo(userInfo: userInfo, completionHandler: completion)
+    func saveUserInfo(_ userInfo: UIUserInfo, completion: @escaping () -> (Void)) {
+        let image = userInfo.image == nil ? nil : UIImageJPEGRepresentation(userInfo.image!, 0.8)
+        let infoToSave = UserInfo(name: userInfo.name, info: userInfo.info, image: image)
+        profileService.updateAppUserInfo(userInfo: infoToSave, completionHandler: completion)
     }
     
-    func loadUserInfo(completionHandler: ((UserInfo)->Void)?) {
-        return storageManager.getAppUserInfo(completionHandler: completionHandler)
+    func loadUserInfo() -> UIUserInfo {
+        let userInfo = profileService.getAppUserInfo()
+        var uiUserInfo = UIUserInfo(name: userInfo.name, info: userInfo.info, image: nil)
+        if let imageData = userInfo.image {
+            uiUserInfo.image = UIImage(data: imageData)
+        }
+        
+        return uiUserInfo
     }
 }

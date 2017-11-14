@@ -19,12 +19,12 @@ extension AppUser {
         }
         
         var appUser: AppUser?
-        guard let fetchReguest = AppUser.fetchRequestAppUser(model: model) else {
+        guard let fetchRequest = AppUser.fetchRequestAppUser(model: model) else {
             return nil
         }
         
         do {
-            let results = try context.fetch(fetchReguest)
+            let results = try context.fetch(fetchRequest)
             if let foundUser = results.first {
                 appUser = foundUser
             }
@@ -34,6 +34,30 @@ extension AppUser {
         
         if appUser == nil {
             appUser = AppUser.insertAppUser(in: context)
+        }
+        
+        return appUser
+    }
+    
+    static func findAppUser(in context: NSManagedObjectContext) -> AppUser? {
+        guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
+            print("Model is not available in context!")
+            assert(false)
+            return nil
+        }
+        
+        var appUser: AppUser?
+        guard let fetchRequest = AppUser.fetchRequestAppUser(model: model) else {
+            return nil
+        }
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let foundUser = results.first {
+                appUser = foundUser
+            }
+        } catch {
+            print("Failed to fetch AppUser: \(error)")
         }
         
         return appUser
