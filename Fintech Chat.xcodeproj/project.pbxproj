@@ -125,8 +125,6 @@
 			children = (
 				7470BFEE1FA636EE00F606D6 /* DataManagement */,
 				7470BFED1FA636CC00F606D6 /* Communication */,
-				740ADF9C1FBA2FD900AF6DD6 /* CommunicationManager.swift */,
-				740ADF9E1FBA32DA00AF6DD6 /* StorageManager.swift */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -134,6 +132,7 @@
 		7470BFED1FA636CC00F606D6 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
+				740ADF9C1FBA2FD900AF6DD6 /* CommunicationManager.swift */,
 				745A788A1F9B429900C16206 /* MultipeerCommunicator.swift */,
 			);
 			path = Communication;
@@ -142,6 +141,7 @@
 		7470BFEE1FA636EE00F606D6 /* DataManagement */ = {
 			isa = PBXGroup;
 			children = (
+				740ADF9E1FBA32DA00AF6DD6 /* StorageManager.swift */,
 				74FD99A71FAF7B6900AAE672 /* CoreDataStack.swift */,
 			);
 			path = DataManagement;
