@@ -44,7 +44,7 @@ class RootAssembly {
     
     
     private var _conversationsListModule: ConversationsListAssembly?
-    public var conversationsListModule: ConversationsListAssembly {
+    var conversationsListModule: ConversationsListAssembly {
         get {
             if _conversationsListModule == nil {
                 _conversationsListModule = ConversationsListAssembly(storageManager: storageManager)
@@ -55,7 +55,7 @@ class RootAssembly {
     }
     
     private var _conversationModule: ConversationAssembly?
-    public var conversationModule: ConversationAssembly {
+    var conversationModule: ConversationAssembly {
         get {
             if _conversationModule == nil {
                 _conversationModule = ConversationAssembly(storageManager: storageManager, communicationManager: communicationManager)
@@ -66,7 +66,7 @@ class RootAssembly {
     }
     
     private var _profileModule: ProfileAssembly?
-    public var profileModule: ProfileAssembly {
+    var profileModule: ProfileAssembly {
         get {
             if _profileModule == nil {
                 _profileModule = ProfileAssembly(storageManager: storageManager, communicationManager: communicationManager)
@@ -76,12 +76,23 @@ class RootAssembly {
         }
     }
     
-    public func turnOffCommunicator() {
+    private var _imageCollectionModule: ImageCollectionAssembly?
+    var imageCollectionModule: ImageCollectionAssembly {
+        get {
+            if _imageCollectionModule == nil {
+                _imageCollectionModule = ImageCollectionAssembly()
+            }
+            
+            return _imageCollectionModule!
+        }
+    }
+    
+    func turnOffCommunicator() {
         communicationManager.online = false
         storageManager.setAllUsersOffline()
     }
     
-    public func turnOnCommunicator() {
+    func turnOnCommunicator() {
         communicationManager.online = true
     }
 }

@@ -26,7 +26,6 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="F4x-iH-Qg3" customClass="RoundedImageView" customModule="Fintech_Chat" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="16" width="343" height="343"/>
-                                                <color key="backgroundColor" red="0.58044424930000005" green="0.72469478089999995" blue="0.86894531249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="F4x-iH-Qg3" secondAttribute="height" multiplier="1:1" id="TfQ-SW-3tY"/>
                                                 </constraints>
@@ -185,7 +184,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DzH-hR-Rzq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1643" y="182"/>
+            <point key="canvasLocation" x="890" y="-615"/>
         </scene>
     </scenes>
     <resources>
