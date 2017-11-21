@@ -21,10 +21,20 @@
 		745D47671FA7174E00457F70 /* ConversationAssebly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745D47661FA7174E00457F70 /* ConversationAssebly.swift */; };
 		745D476D1FA7ADA300457F70 /* ConversationsList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745D476C1FA7ADA200457F70 /* ConversationsList.storyboard */; };
 		745D476F1FA7AEC300457F70 /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745D476E1FA7AEC300457F70 /* Conversation.storyboard */; };
+		74653A7E1FC3641A00F4B800 /* ImageCollectionAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74653A7D1FC3641A00F4B800 /* ImageCollectionAssembly.swift */; };
 		746E93131FA884BA00C4C7C6 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E93121FA884BA00C4C7C6 /* ProfileModel.swift */; };
 		7470BFEC1FA632E900F606D6 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7470BFEB1FA632E900F606D6 /* RootAssembly.swift */; };
 		7470BFF61FA6559400F606D6 /* ConversationsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7470BFF51FA6559400F606D6 /* ConversationsListAssembly.swift */; };
 		749EB0881F7EBF670034E38F /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749EB0871F7EBF670034E38F /* RoundedImageView.swift */; };
+		74AB818E1FC2088300B68228 /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB818D1FC2088300B68228 /* ImageCollectionViewController.swift */; };
+		74AB81901FC2089A00B68228 /* ImageCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AB818F1FC2089A00B68228 /* ImageCollection.storyboard */; };
+		74AB81921FC20DDA00B68228 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB81911FC20DDA00B68228 /* ImageCollectionViewCell.swift */; };
+		74AB81941FC21ED800B68228 /* ImageCollectionDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB81931FC21ED800B68228 /* ImageCollectionDataModel.swift */; };
+		74AB81961FC2C26500B68228 /* ImagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB81951FC2C26500B68228 /* ImagesService.swift */; };
+		74AB81991FC2DEB700B68228 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB81981FC2DEB700B68228 /* RequestSender.swift */; };
+		74AB819B1FC2E12500B68228 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB819A1FC2E12500B68228 /* Request.swift */; };
+		74AB819D1FC2EAE400B68228 /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB819C1FC2EAE400B68228 /* RequestsFactory.swift */; };
+		74AB81A11FC3184500B68228 /* ParserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AB81A01FC3184500B68228 /* ParserFactory.swift */; };
 		74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AC1B681F7700B400AC6152 /* AppDelegate.swift */; };
 		74AC1B731F7700B400AC6152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B721F7700B400AC6152 /* Assets.xcassets */; };
 		74AC1B761F7700B400AC6152 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AC1B741F7700B400AC6152 /* LaunchScreen.storyboard */; };
@@ -57,10 +67,20 @@
 		745D47661FA7174E00457F70 /* ConversationAssebly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationAssebly.swift; sourceTree = "<group>"; };
 		745D476C1FA7ADA200457F70 /* ConversationsList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationsList.storyboard; sourceTree = "<group>"; };
 		745D476E1FA7AEC300457F70 /* Conversation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversation.storyboard; sourceTree = "<group>"; };
+		74653A7D1FC3641A00F4B800 /* ImageCollectionAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionAssembly.swift; sourceTree = "<group>"; };
 		746E93121FA884BA00C4C7C6 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		7470BFEB1FA632E900F606D6 /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
 		7470BFF51FA6559400F606D6 /* ConversationsListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListAssembly.swift; sourceTree = "<group>"; };
 		749EB0871F7EBF670034E38F /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
+		74AB818D1FC2088300B68228 /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
+		74AB818F1FC2089A00B68228 /* ImageCollection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageCollection.storyboard; sourceTree = "<group>"; };
+		74AB81911FC20DDA00B68228 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		74AB81931FC21ED800B68228 /* ImageCollectionDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionDataModel.swift; sourceTree = "<group>"; };
+		74AB81951FC2C26500B68228 /* ImagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesService.swift; sourceTree = "<group>"; };
+		74AB81981FC2DEB700B68228 /* RequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
+		74AB819A1FC2E12500B68228 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		74AB819C1FC2EAE400B68228 /* RequestsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsFactory.swift; sourceTree = "<group>"; };
+		74AB81A01FC3184500B68228 /* ParserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserFactory.swift; sourceTree = "<group>"; };
 		74AC1B651F7700B400AC6152 /* Fintech Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fintech Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74AC1B681F7700B400AC6152 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74AC1B721F7700B400AC6152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,6 +123,7 @@
 		745C27041FA605E000F051BA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				74AB818C1FC2085600B68228 /* Image Collection */,
 				74BE69861F94065C0038CB12 /* Profile */,
 				74BD18071F8ADE3500783280 /* Conversations List */,
 				74BD18061F8ADE1600783280 /* Conversation */,
@@ -116,6 +137,7 @@
 				742892C81FB7601B00BA580E /* ProfileService.swift */,
 				741B59DD1FB76C3900EB0D61 /* ConversationsPreviewsService.swift */,
 				74C146711FBA4CBF00D24430 /* ConversationService.swift */,
+				74AB81951FC2C26500B68228 /* ImagesService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -123,6 +145,7 @@
 		745C27061FA6067200F051BA /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				74AB81971FC2DE9E00B68228 /* Networking */,
 				7470BFEE1FA636EE00F606D6 /* DataManagement */,
 				7470BFED1FA636CC00F606D6 /* Communication */,
 			);
@@ -145,6 +168,29 @@
 				74FD99A71FAF7B6900AAE672 /* CoreDataStack.swift */,
 			);
 			path = DataManagement;
+			sourceTree = "<group>";
+		};
+		74AB818C1FC2085600B68228 /* Image Collection */ = {
+			isa = PBXGroup;
+			children = (
+				74AB818D1FC2088300B68228 /* ImageCollectionViewController.swift */,
+				74AB818F1FC2089A00B68228 /* ImageCollection.storyboard */,
+				74AB81911FC20DDA00B68228 /* ImageCollectionViewCell.swift */,
+				74AB81931FC21ED800B68228 /* ImageCollectionDataModel.swift */,
+				74653A7D1FC3641A00F4B800 /* ImageCollectionAssembly.swift */,
+			);
+			path = "Image Collection";
+			sourceTree = "<group>";
+		};
+		74AB81971FC2DE9E00B68228 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				74AB81981FC2DEB700B68228 /* RequestSender.swift */,
+				74AB819A1FC2E12500B68228 /* Request.swift */,
+				74AB819C1FC2EAE400B68228 /* RequestsFactory.swift */,
+				74AB81A01FC3184500B68228 /* ParserFactory.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		74AC1B5C1F7700B400AC6152 = {
@@ -312,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				745D476D1FA7ADA300457F70 /* ConversationsList.storyboard in Resources */,
+				74AB81901FC2089A00B68228 /* ImageCollection.storyboard in Resources */,
 				74AC1B761F7700B400AC6152 /* LaunchScreen.storyboard in Resources */,
 				745D476F1FA7AEC300457F70 /* Conversation.storyboard in Resources */,
 				74AC1B821F77A78500AC6152 /* Media.xcassets in Resources */,
@@ -327,13 +374,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74AB818E1FC2088300B68228 /* ImageCollectionViewController.swift in Sources */,
 				74AC1B801F77A76500AC6152 /* ProfileViewController.swift in Sources */,
+				74AB819D1FC2EAE400B68228 /* RequestsFactory.swift in Sources */,
 				740ADF9D1FBA2FD900AF6DD6 /* CommunicationManager.swift in Sources */,
 				74FD99AF1FAFB71300AAE672 /* Storage.xcdatamodeld in Sources */,
+				74AB819B1FC2E12500B68228 /* Request.swift in Sources */,
 				740ADF9F1FBA32DA00AF6DD6 /* StorageManager.swift in Sources */,
 				745D47671FA7174E00457F70 /* ConversationAssebly.swift in Sources */,
 				74FD99B41FB0BB8100AAE672 /* UserExtension.swift in Sources */,
+				74AB81921FC20DDA00B68228 /* ImageCollectionViewCell.swift in Sources */,
 				744A27B61FA895F000D71AFE /* ProfileAssebly.swift in Sources */,
+				74653A7E1FC3641A00F4B800 /* ImageCollectionAssembly.swift in Sources */,
+				74AB81961FC2C26500B68228 /* ImagesService.swift in Sources */,
 				74C8AD191FB8E51500BF8A87 /* ConversationTableDataSource.swift in Sources */,
 				749EB0881F7EBF670034E38F /* RoundedImageView.swift in Sources */,
 				742892C91FB7601B00BA580E /* ProfileService.swift in Sources */,
@@ -341,12 +394,15 @@
 				7470BFEC1FA632E900F606D6 /* RootAssembly.swift in Sources */,
 				74BD18041F8ADDAD00783280 /* MessageTableViewCell.swift in Sources */,
 				74BD17FF1F8AA2DC00783280 /* ConversationViewController.swift in Sources */,
+				74AB81941FC21ED800B68228 /* ImageCollectionDataModel.swift in Sources */,
 				740594C31FB7B392003AA7A6 /* Conversation.swift in Sources */,
 				74BD17F71F8A307E00783280 /* ConversationTableViewCell.swift in Sources */,
 				74FD99B21FB0BB6100AAE672 /* AppUserExtension.swift in Sources */,
 				745A788B1F9B429900C16206 /* MultipeerCommunicator.swift in Sources */,
 				741B59E21FB7AB3D00EB0D61 /* MessageExtension.swift in Sources */,
 				746E93131FA884BA00C4C7C6 /* ProfileModel.swift in Sources */,
+				74AB81991FC2DEB700B68228 /* RequestSender.swift in Sources */,
+				74AB81A11FC3184500B68228 /* ParserFactory.swift in Sources */,
 				7470BFF61FA6559400F606D6 /* ConversationsListAssembly.swift in Sources */,
 				741B59DE1FB76C3900EB0D61 /* ConversationsPreviewsService.swift in Sources */,
 				74AC1B691F7700B400AC6152 /* AppDelegate.swift in Sources */,

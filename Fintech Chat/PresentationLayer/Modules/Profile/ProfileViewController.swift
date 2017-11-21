@@ -31,6 +31,12 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     private var model: IProfileModel?
     
+    static func initVC(model: IProfileModel) -> ProfileViewController {
+        let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
+        profileVC.model = model
+        return profileVC
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,12 +54,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
 
         // Set button image "margins"
         takePictureButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
-    }
-    
-    static func initVC(model: IProfileModel) -> ProfileViewController {
-        let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
-        profileVC.model = model
-        return profileVC
     }
     
     deinit {
@@ -132,11 +132,12 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         imagePickerController.delegate = self
         
         let alertController = UIAlertController(title: "Установить изображение профиля", message: "Можете выбрать фотографию из галереи, либо сделать новый снимок", preferredStyle: .actionSheet)
-        let pickFromGallery = UIAlertAction(title: "Установить из галереи", style: .default) { action in
+        let pickFromGallery = UIAlertAction(title: "Установить из галереи", style: .default) { _ in
             imagePickerController.sourceType = .photoLibrary
             self.present(imagePickerController, animated: true, completion: nil)
         }
-        let makePhoto = UIAlertAction(title: "Сделать фото", style: .default) { action in
+        
+        let makePhoto = UIAlertAction(title: "Сделать фото", style: .default) { _ in
             if UIImagePickerController.isSourceTypeAvailable(.camera){
                 imagePickerController.sourceType = .camera
                 self.present(imagePickerController, animated: true, completion: nil)
@@ -145,15 +146,30 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
                 self.presentLoadImageErrorAlert(withMessage: "Камера не найдена на Вашем устройстве")
             }
         }
+        
+        let pickFromAPI = UIAlertAction(title: "Загрузить", style: .default) { [weak self] _ in
+            self?.showImageCollection()
+        }
         let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
         alertController.addAction(pickFromGallery)
         alertController.addAction(makePhoto)
+        alertController.addAction(pickFromAPI)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func showImageCollection() {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        guard appDelegate != nil else { return }
+        
+        let imageCollectionAssembly = appDelegate!.rootAssembly.imageCollectionModule
+        let destinationVC = imageCollectionAssembly.embededInNavImageCollectionVC(withDelegate: self)
+        
+        present(destinationVC, animated: true, completion: nil)
     }
     
     // MARK: - Alerts
@@ -167,6 +183,16 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         let alertController = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension ProfileViewController: ImageCollectionViewControllerDelegate {
+    func didPickImage(_ image: UIImage?) {
+        if let image = image {
+            saveButton.isEnabled = true
+            profileImageChanged = true
+            profileImage.image = image
+        }
     }
 }
 
