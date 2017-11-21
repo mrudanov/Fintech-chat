@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct RequestConfig<Model, Parser> where Parser: IParser, Parser.Model == Model {
+struct RequestConfig<Model> {
     let request: IRequest
-    let parser: Parser
+    let parser: Parser<Model>
 }
 
 protocol IRequest {

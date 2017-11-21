@@ -9,7 +9,7 @@
 import Foundation
 
 protocol IRequestSender {
-    func send<Parser, Model>(config: RequestConfig<Model, Parser>, completionHandler: @escaping (Result<Model>) -> Void)
+    func send<Model>(config: RequestConfig<Model>, completionHandler: @escaping (Result<Model>) -> Void)
 }
 
 enum Result<T> {
@@ -20,7 +20,7 @@ enum Result<T> {
 class RequestSender: IRequestSender {
     private let session = URLSession.shared
     
-    func send<Model, Parser>(config: RequestConfig<Model, Parser>, completionHandler: @escaping (Result<Model>) -> Void) {
+    func send<Model>(config: RequestConfig<Model>, completionHandler: @escaping (Result<Model>) -> Void) {
         guard let urlRequest = config.request.urlRequest else {
             completionHandler(Result.error("Url string can't be parsed to URL!"))
             return
@@ -32,7 +32,7 @@ class RequestSender: IRequestSender {
                 return
             }
             
-            guard let data = data, let parseModel: Model = config.parser.parse(data: data) else {
+            guard let data = data, let parseModel: Model = config.parser(data) else {
                 completionHandler(Result.error("Did not recieved data!"))
                 return
             }

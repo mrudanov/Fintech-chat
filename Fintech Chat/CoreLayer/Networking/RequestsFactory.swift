@@ -11,14 +11,14 @@ import Foundation
 struct RequestsFactory {
     
     struct PixabayRequests {
-        static func imagesListRequest() -> RequestConfig<ImageListAPIModel, JSONParser> {
-            let request = PixabayRequest(apiKey: "7109883-b07037ae17b8ec5baaa500044", imagesCount: 200)
-            return RequestConfig(request: request, parser: JSONParser())
+        static func imagesListRequest() -> RequestConfig<ImageListAPIModel> {
+            let request = PixabayRequest(apiKey: "7109883-b07037ae17b8ec5baaa500044", imagesCount: 90)
+            return RequestConfig(request: request, parser: ParserFactory.imageListJSONParser)
         }
         
-        static func imageRequest(with: String) -> RequestConfig<Data, DataParser> {
+        static func imageRequest(with: String) -> RequestConfig<Data> {
             let request = SimpeImageRequest(urlString: with)
-            return RequestConfig(request: request, parser: DataParser())
+            return RequestConfig(request: request, parser: ParserFactory.dataParser)
         }
     }
 }

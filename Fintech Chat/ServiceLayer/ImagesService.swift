@@ -31,18 +31,19 @@ class ImagesService: IImagesService {
     
     func loadImageList(completion: @escaping (ImageListAPIModel?, String?) -> Void) {
         let request = RequestsFactory.PixabayRequests.imagesListRequest()
-        
-        load(request: request, completion: completion)
+        requestSender.send(config: request) { (result: Result<ImageListAPIModel>) in
+            switch result {
+            case .success(let list):
+                completion(list, nil)
+            case .error(let error):
+                completion(nil, error)
+            }
+        }
     }
     
     func loadImage(urlString: String, completion: @escaping (Data?, String?) -> Void) {
         let request = RequestsFactory.PixabayRequests.imageRequest(with: urlString)
-
-        load(request: request, completion: completion)
-    }
-    
-    private func load<Model, Parser>(request: RequestConfig<Model, Parser>, completion: @escaping (Model?, String?) -> Void) {
-        requestSender.send(config: request) { (result: Result<Model>) in
+        requestSender.send(config: request) { (result: Result<Data>) in
             switch result {
             case .success(let list):
                 completion(list, nil)
