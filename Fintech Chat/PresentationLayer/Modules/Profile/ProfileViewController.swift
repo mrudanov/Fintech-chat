@@ -14,7 +14,7 @@ struct UIUserInfo {
     var image: UIImage?
 }
 
-class ProfileViewController: UIViewController, UINavigationControllerDelegate {
+class ProfileViewController: GeneratorViwController, UINavigationControllerDelegate {
     
     @IBOutlet weak var takePictureButton: RoundedButton!
     @IBOutlet weak var profileImage: RoundedImageView!
@@ -64,6 +64,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
         self.dismiss(animated: true)
     }
     
+    
     // MARK: - keyboard and text edditing
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -76,6 +77,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
     }
     

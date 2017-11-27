@@ -9,18 +9,19 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelegate {
 
     var window: UIWindow?
     
     let rootAssembly = RootAssembly()
-    
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let mainVC = rootAssembly.conversationsListModule.embededInNavProfileVC()
         window?.rootViewController = mainVC
         window?.makeKeyAndVisible()
+        
         return true
     }
     

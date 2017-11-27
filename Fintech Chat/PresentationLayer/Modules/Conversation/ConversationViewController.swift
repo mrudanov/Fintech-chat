@@ -106,6 +106,7 @@ class ConversationViewController: UIViewController {
                 flag ? self?.didAddMessage() : self?.didFailedSendMessage(text: text)
             }
         }
+        view.endEditing(true)
         messageTextField.text = nil
         textFieldIsEmpty = true
         updateSendButton()

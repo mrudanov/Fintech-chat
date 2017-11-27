@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74035F901FCC8CDE005A88D2 /* IconsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F8F1FCC8CDE005A88D2 /* IconsGenerator.swift */; };
+		74035F931FCCDB6F005A88D2 /* GeneratorUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F921FCCDB6F005A88D2 /* GeneratorUIView.swift */; };
+		74035F951FCCDB89005A88D2 /* GeneratorUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F941FCCDB89005A88D2 /* GeneratorUIViewController.swift */; };
+		74035F991FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F981FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift */; };
+		74035F9B1FCCDBDE005A88D2 /* GeneratorUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F9A1FCCDBDE005A88D2 /* GeneratorUITableView.swift */; };
 		740594C31FB7B392003AA7A6 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740594C21FB7B392003AA7A6 /* Conversation.swift */; };
 		740ADF9D1FBA2FD900AF6DD6 /* CommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740ADF9C1FBA2FD900AF6DD6 /* CommunicationManager.swift */; };
 		740ADF9F1FBA32DA00AF6DD6 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740ADF9E1FBA32DA00AF6DD6 /* StorageManager.swift */; };
@@ -53,6 +58,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		74035F8F1FCC8CDE005A88D2 /* IconsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsGenerator.swift; sourceTree = "<group>"; };
+		74035F921FCCDB6F005A88D2 /* GeneratorUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorUIView.swift; sourceTree = "<group>"; };
+		74035F941FCCDB89005A88D2 /* GeneratorUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorUIViewController.swift; sourceTree = "<group>"; };
+		74035F981FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorUINavigationBar.swift; sourceTree = "<group>"; };
+		74035F9A1FCCDBDE005A88D2 /* GeneratorUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorUITableView.swift; sourceTree = "<group>"; };
 		740594C21FB7B392003AA7A6 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		740ADF9C1FBA2FD900AF6DD6 /* CommunicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
 		740ADF9E1FBA32DA00AF6DD6 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -111,11 +121,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74035F911FCC8CE7005A88D2 /* IconsGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				74035F8F1FCC8CDE005A88D2 /* IconsGenerator.swift */,
+				74035F921FCCDB6F005A88D2 /* GeneratorUIView.swift */,
+				74035F941FCCDB89005A88D2 /* GeneratorUIViewController.swift */,
+				74035F981FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift */,
+				74035F9A1FCCDBDE005A88D2 /* GeneratorUITableView.swift */,
+			);
+			path = IconsGenerator;
+			sourceTree = "<group>";
+		};
 		745C27031FA605A600F051BA /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
 				74BD18051F8ADDDE00783280 /* UI Rounded */,
 				745C27041FA605E000F051BA /* Modules */,
+				74035F911FCC8CE7005A88D2 /* IconsGenerator */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -330,6 +353,7 @@
 				TargetAttributes = {
 					74AC1B641F7700B400AC6152 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -379,12 +403,15 @@
 				74AB819D1FC2EAE400B68228 /* RequestsFactory.swift in Sources */,
 				740ADF9D1FBA2FD900AF6DD6 /* CommunicationManager.swift in Sources */,
 				74FD99AF1FAFB71300AAE672 /* Storage.xcdatamodeld in Sources */,
+				74035F951FCCDB89005A88D2 /* GeneratorUIViewController.swift in Sources */,
+				74035F931FCCDB6F005A88D2 /* GeneratorUIView.swift in Sources */,
 				74AB819B1FC2E12500B68228 /* Request.swift in Sources */,
 				740ADF9F1FBA32DA00AF6DD6 /* StorageManager.swift in Sources */,
 				745D47671FA7174E00457F70 /* ConversationAssebly.swift in Sources */,
 				74FD99B41FB0BB8100AAE672 /* UserExtension.swift in Sources */,
 				74AB81921FC20DDA00B68228 /* ImageCollectionViewCell.swift in Sources */,
 				744A27B61FA895F000D71AFE /* ProfileAssebly.swift in Sources */,
+				74035F901FCC8CDE005A88D2 /* IconsGenerator.swift in Sources */,
 				74653A7E1FC3641A00F4B800 /* ImageCollectionAssembly.swift in Sources */,
 				74AB81961FC2C26500B68228 /* ImagesService.swift in Sources */,
 				74C8AD191FB8E51500BF8A87 /* ConversationTableDataSource.swift in Sources */,
@@ -393,12 +420,14 @@
 				74C146721FBA4CBF00D24430 /* ConversationService.swift in Sources */,
 				7470BFEC1FA632E900F606D6 /* RootAssembly.swift in Sources */,
 				74BD18041F8ADDAD00783280 /* MessageTableViewCell.swift in Sources */,
+				74035F9B1FCCDBDE005A88D2 /* GeneratorUITableView.swift in Sources */,
 				74BD17FF1F8AA2DC00783280 /* ConversationViewController.swift in Sources */,
 				74AB81941FC21ED800B68228 /* ImageCollectionDataModel.swift in Sources */,
 				740594C31FB7B392003AA7A6 /* Conversation.swift in Sources */,
 				74BD17F71F8A307E00783280 /* ConversationTableViewCell.swift in Sources */,
 				74FD99B21FB0BB6100AAE672 /* AppUserExtension.swift in Sources */,
 				745A788B1F9B429900C16206 /* MultipeerCommunicator.swift in Sources */,
+				74035F991FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift in Sources */,
 				741B59E21FB7AB3D00EB0D61 /* MessageExtension.swift in Sources */,
 				746E93131FA884BA00C4C7C6 /* ProfileModel.swift in Sources */,
 				74AB81991FC2DEB700B68228 /* RequestSender.swift in Sources */,
@@ -538,12 +567,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EYNJSUJ3CP;
 				INFOPLIST_FILE = "Fintech Chat/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mrudanov.Fintech-Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -553,12 +585,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EYNJSUJ3CP;
 				INFOPLIST_FILE = "Fintech Chat/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mrudanov.Fintech-Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

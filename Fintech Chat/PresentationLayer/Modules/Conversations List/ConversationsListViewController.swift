@@ -12,6 +12,7 @@ class ConversationsListViewController: UIViewController {
     
     @IBOutlet weak var conversationsListTableView: UITableView!
     private var tableDataSource: IConversationsListTableDataSource?
+    private var generator: IconsGenerator?
     
     static func initVC(with tableDataSource: IConversationsListTableDataSource) -> ConversationsListViewController {
         let conversationVC = UIStoryboard(name: "ConversationsList", bundle: nil).instantiateViewController(withIdentifier: "ConversationsList") as! ConversationsListViewController
@@ -32,7 +33,6 @@ class ConversationsListViewController: UIViewController {
         guard appDelegate != nil else { return }
         
         let conversationAssembly = appDelegate!.rootAssembly.conversationModule
-        
         let destinationVC = conversationAssembly.conversationViewController(userID: userID, userName: userName, isOnline: isOnline)
         
         show(destinationVC, sender: nil)
