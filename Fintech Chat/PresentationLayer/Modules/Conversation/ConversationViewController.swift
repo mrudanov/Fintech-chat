@@ -9,19 +9,31 @@
 import UIKit
 
 class ConversationViewController: UIViewController {
-    
     @IBOutlet weak var conversationTableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var sendButton: RoundedButton!
+    
+    private let enabledButtonColor: UIColor = UIColor(red:0.22, green:0.87, blue:0.91, alpha:1.0)
+    private let disabledButtonColor: UIColor = UIColor(red:0.54, green:0.54, blue:0.54, alpha:1.0)
+    private let titleOnlineColor: UIColor = UIColor(red:0.36, green:0.71, blue:0.30, alpha:1.0)
+    private let titleOfflineColor: UIColor = UIColor.black
+    private let navigationTitleLabelView = UILabel.init(frame: CGRect(x: 0, y: 0, width: 250, height: 44))
+    
     
     var contactName: String?
     var userID = String()
+    var isOnline = Bool()
+    
+    private var textFieldIsEmpty: Bool = true
+    private var sendButtonIsAnimating: Bool = false
     private var tableDataSource: IConversationTableDataSource?
     
-    static func initVC(with tableDataSource: IConversationTableDataSource, userID: String, userName: String) -> ConversationViewController {
+    static func initVC(with tableDataSource: IConversationTableDataSource, userID: String, userName: String, online: Bool) -> ConversationViewController {
         let conversationVC = UIStoryboard(name: "Conversation", bundle: nil).instantiateViewController(withIdentifier: "Conversation") as! ConversationViewController
         conversationVC.tableDataSource = tableDataSource
         conversationVC.contactName = userName
         conversationVC.userID = userID
+        conversationVC.isOnline = online
         return conversationVC
     }
     
@@ -31,21 +43,120 @@ class ConversationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = contactName ?? "Unknown"
+//        setupNavigationTitle()
+        setupTableView()
+        setupTextField()
+        setupKeyboardObservers()
+        setupSendButton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setupNavigationTitle()
+    }
+    
+    private func setupTableView() {
         conversationTableView.estimatedRowHeight = conversationTableView.rowHeight
         conversationTableView.rowHeight = UITableViewAutomaticDimension
-        
-        // add observers to move view with keyboard
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        messageTextField.delegate = self
         conversationTableView.dataSource = tableDataSource
         tableDataSource?.delegate = self
         scrollToLastRow()
     }
     
+    // MARK: - Navigation bar
+    func setupNavigationTitle() {
+        navigationTitleLabelView.backgroundColor = UIColor.clear
+        navigationTitleLabelView.textAlignment = .center
+        navigationTitleLabelView.font = UIFont.boldSystemFont(ofSize: 16.0)
+        navigationTitleLabelView.adjustsFontSizeToFitWidth = true
+        navigationTitleLabelView.text = contactName ?? "Unknown"
+        navigationItem.titleView = navigationTitleLabelView
+        
+        if isOnline {
+            navigationTitleLabelView.textColor = titleOnlineColor
+            navigationItem.titleView?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        } else {
+            navigationTitleLabelView.textColor = titleOfflineColor
+        }
+    }
+    
+    func updateNavigationBarTitle() {
+        navigationTitleLabelView.layer.removeAllAnimations()
+        if isOnline {
+            UIView.transition(with: navigationTitleLabelView, duration: 1, options: .transitionCrossDissolve, animations: {
+                self.navigationTitleLabelView.textColor = self.titleOnlineColor
+                self.navigationItem.titleView?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            }, completion: nil)
+        } else {
+            UIView.transition(with: navigationTitleLabelView, duration: 1, options: .transitionCrossDissolve, animations: {
+                self.navigationTitleLabelView.textColor = self.titleOfflineColor
+                 self.navigationItem.titleView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            }, completion: nil)
+        }
+    }
+    
+    // MARK: - Send button
+    private func setupSendButton() {
+        sendButton.isEnabled = false
+        sendButton.backgroundColor = disabledButtonColor
+    }
+    
+    @IBAction func didPressSendButton(_ sender: RoundedButton) {
+        if let text = messageTextField.text {
+            tableDataSource?.sendMessage(text: text, to: userID) { [weak self, text] flag, error in
+                flag ? self?.didAddMessage() : self?.didFailedSendMessage(text: text)
+            }
+        }
+        messageTextField.text = nil
+        textFieldIsEmpty = true
+        updateSendButton()
+    }
+    
+    private func updateSendButton() {
+        if isOnline && !textFieldIsEmpty {
+            if !sendButton.isEnabled {
+                sendButton.isEnabled = true
+                animateSendButton(toColor: enabledButtonColor)
+            }
+        } else {
+            if sendButton.isEnabled {
+                sendButton.isEnabled = false
+                animateSendButton(toColor: disabledButtonColor)
+            }
+        }
+    }
+    
+    private func animateSendButton(toColor: UIColor) {
+        if !sendButtonIsAnimating {
+            sendButtonIsAnimating = true
+            UIView.animate(withDuration: 0.5, animations: {
+                self.sendButton.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+                self.sendButton.backgroundColor = toColor
+            }) { finished in
+                if finished {
+                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { timer in
+                        UIView.animate(withDuration: 0.5) {
+                            self.sendButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                            self.sendButtonIsAnimating = false
+                        }
+                    }
+                } else {
+                    self.sendButtonIsAnimating = false
+                }
+            }
+        }
+    }
+    
     // MARK: - keyboard and text edditing
+    private func setupTextField() {
+        messageTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        messageTextField.delegate = self
+    }
+    
+    private func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             self.view.frame.origin.y = -keyboardSize.height
@@ -54,6 +165,20 @@ class ConversationViewController: UIViewController {
     
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if textField.text == "" {
+            if !textFieldIsEmpty {
+                textFieldIsEmpty = true
+                updateSendButton()
+            }
+        } else {
+            if textFieldIsEmpty {
+                textFieldIsEmpty = false
+                updateSendButton()
+            }
+        }
     }
     
     // MARK: - Helper functions
@@ -92,25 +217,37 @@ class ConversationViewController: UIViewController {
 extension ConversationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        if let text = textField.text {
-            if text != "" {
-                tableDataSource?.sendMessage(text: text, to: userID) { [weak self, text] flag, error in
-                    flag ? self?.didAddMessage() : self?.didFailedSendMessage(text: text)
-                }
-            }
-        }
-        textField.text = nil
         return true
     }
 }
 
 extension ConversationViewController: ConversationTableDataSourceDelegate {
+    func userBecameOnline() {
+        if !isOnline {
+            DispatchQueue.main.async { [weak self] in
+                self?.isOnline = true
+                self?.updateSendButton()
+                self?.updateNavigationBarTitle()
+            }
+        }
+    }
+    
+    func userBecameOffline() {
+        if isOnline {
+            DispatchQueue.main.async { [weak self] in
+                self?.isOnline = false
+                self?.updateSendButton()
+                self?.updateNavigationBarTitle()
+            }
+        }
+    }
+    
     func prerapeCell(with message: Message, at indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         if message.sender?.userId == userID {
-            cell = conversationTableView.dequeueReusableCell(withIdentifier: "OutputMessageCell", for: indexPath)
-        } else {
             cell = conversationTableView.dequeueReusableCell(withIdentifier: "InputMessageCell", for: indexPath)
+        } else {
+            cell = conversationTableView.dequeueReusableCell(withIdentifier: "OutputMessageCell", for: indexPath)
         }
         if let conversationCell = cell as? MessageTableViewCell {
             conversationCell.messageText = message.text

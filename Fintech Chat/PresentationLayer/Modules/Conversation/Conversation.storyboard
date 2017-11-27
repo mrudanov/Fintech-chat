@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5Az-mV-LfD">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,25 +15,25 @@
             <objects>
                 <viewController storyboardIdentifier="Conversation" id="5Az-mV-LfD" customClass="ConversationViewController" customModule="Fintech_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yy8-bk-YEA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YrQ-5L-Za0">
-                                <rect key="frame" x="0.0" y="20" width="375" height="596"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="OutputMessageCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OutputMessageCell" id="QZr-K2-EOd" customClass="MessageTableViewCell" customModule="Fintech_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QZr-K2-EOd" id="Bqa-fS-lLk">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPB-jl-RLp">
-                                                    <rect key="frame" x="94" y="0.0" width="281" height="43.5"/>
+                                                    <rect key="frame" x="80" y="0.0" width="240" height="43.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output message" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrT-Rg-cr9">
-                                                            <rect key="frame" x="0.0" y="10" width="273" height="23.5"/>
+                                                            <rect key="frame" x="0.0" y="10" width="232" height="23.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -60,17 +60,17 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="InputMessageCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InputMessageCell" id="v0h-Iy-2eR" customClass="MessageTableViewCell" customModule="Fintech_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v0h-Iy-2eR" id="bAP-0N-WJ0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mq-Pt-R1Z">
-                                                    <rect key="frame" x="0.0" y="0.0" width="281.5" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAn-Wv-Y0D">
-                                                            <rect key="frame" x="8" y="10" width="273.5" height="23.5"/>
+                                                            <rect key="frame" x="8" y="10" width="232" height="23.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -99,24 +99,45 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxz-7Q-64A">
-                                <rect key="frame" x="0.0" y="616" width="375" height="51"/>
+                                <rect key="frame" x="0.0" y="512" width="320" height="56"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Написать" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="s21-ZG-5VR">
-                                        <rect key="frame" x="8" y="8" width="359" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="tTd-bC-dyC"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hhd-lY-8b1">
+                                        <rect key="frame" x="8" y="8" width="304" height="40"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Написать" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="s21-ZG-5VR">
+                                                <rect key="frame" x="0.0" y="0.0" width="256" height="40"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUI-sv-KlE" customClass="RoundedButton" customModule="Fintech_Chat" customModuleProvider="target">
+                                                <rect key="frame" x="264" y="0.0" width="40" height="40"/>
+                                                <color key="backgroundColor" red="0.31764705882352939" green="0.5607843137254902" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="Ywj-Bi-Buq"/>
+                                                    <constraint firstAttribute="height" constant="40" id="wk5-BP-W2L"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="Send Icon">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="didPressSendButton:" destination="5Az-mV-LfD" eventType="touchUpInside" id="J7N-Wf-Dca"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87404201039999996" green="0.87404201039999996" blue="0.87404201039999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="s21-ZG-5VR" secondAttribute="bottom" constant="8" id="KbQ-x9-9Ls"/>
-                                    <constraint firstItem="s21-ZG-5VR" firstAttribute="leading" secondItem="kxz-7Q-64A" secondAttribute="leading" constant="8" id="jfK-0h-kQg"/>
-                                    <constraint firstItem="s21-ZG-5VR" firstAttribute="top" secondItem="kxz-7Q-64A" secondAttribute="top" constant="8" id="xFA-pU-GXJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="s21-ZG-5VR" secondAttribute="trailing" constant="8" id="z58-bP-QJO"/>
+                                    <constraint firstAttribute="bottom" secondItem="hhd-lY-8b1" secondAttribute="bottom" constant="8" id="8iy-Od-I5o"/>
+                                    <constraint firstAttribute="trailing" secondItem="hhd-lY-8b1" secondAttribute="trailing" constant="8" id="fe3-wq-Of0"/>
+                                    <constraint firstItem="hhd-lY-8b1" firstAttribute="top" secondItem="kxz-7Q-64A" secondAttribute="top" constant="8" id="rPu-Ot-rTw"/>
+                                    <constraint firstItem="hhd-lY-8b1" firstAttribute="leading" secondItem="kxz-7Q-64A" secondAttribute="leading" constant="8" id="s6a-8n-kZ3"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -135,6 +156,7 @@
                     <connections>
                         <outlet property="conversationTableView" destination="YrQ-5L-Za0" id="11n-wR-0n4"/>
                         <outlet property="messageTextField" destination="s21-ZG-5VR" id="RjH-41-4eu"/>
+                        <outlet property="sendButton" destination="oUI-sv-KlE" id="lhH-AW-HJZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y1o-IL-JjX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -142,4 +164,7 @@
             <point key="canvasLocation" x="592.5" y="959.15492957746483"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Send Icon" width="104" height="104"/>
+    </resources>
 </document>

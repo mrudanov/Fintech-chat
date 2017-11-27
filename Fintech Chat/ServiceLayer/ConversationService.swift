@@ -10,21 +10,25 @@ import Foundation
 import CoreData
 
 protocol IConversationService: class {
-    weak var delegate: ConversationsServicesDelegate? {get set}
+    weak var delegate: (ConversationsServicesDelegate & OnlineMonitoringDelegate)? {get set}
     func numberOfRowsInSections(_ section: Int) -> Int
     func objectForRowAt(indexPath: IndexPath) -> Message
     func sendMessage(text: String, to userID: String, completiionHandler: ((Bool, Error?) -> ())?) -> Void
 }
 
-typealias ConversationsServicesDelegate = NSFetchedResultsControllerDelegate
+protocol OnlineMonitoringDelegate: class {
+    func userBecameOnline()
+    func userBecameOffline()
+}
 
 class ConversationService: IConversationService {
     
     private let fetchedResultsController: NSFetchedResultsController<Message>
     private let communicationManager: ICommunicationManager
     private let storageManager: StorageManager
+    private let conversationWithUserId: String
     
-    weak var delegate: ConversationsServicesDelegate? {
+    weak var delegate: (ConversationsServicesDelegate & OnlineMonitoringDelegate)? {
         didSet {
             fetchedResultsController.delegate = delegate
         }
@@ -34,12 +38,18 @@ class ConversationService: IConversationService {
         self.storageManager = storageManager
         fetchedResultsController = storageManager.getConversationWithUserFRC(userId: userId)
         self.communicationManager = communicationManager
+        conversationWithUserId = userId
+        self.storageManager.delegate = self
         
         do {
             try fetchedResultsController.performFetch()
         } catch {
             print("Error fetching: \(error)")
         }
+    }
+    
+    deinit {
+        self.storageManager.delegate = nil
     }
     
     public func numberOfSections() -> Int {
@@ -56,5 +66,20 @@ class ConversationService: IConversationService {
     
     func sendMessage(text: String, to userID: String, completiionHandler: ((Bool, Error?) -> ())?) {
         communicationManager.sendMessage(text: text, to: userID, completionHandler: completiionHandler)
+    }
+}
+
+extension ConversationService: StorageManagerDelegate {
+    func didChangeData() {
+        guard let user = storageManager.getUserById(conversationWithUserId) else {
+            print("Did not found conversation's user")
+            return
+        }
+        
+        if user.isOnline {
+            delegate?.userBecameOnline()
+        } else {
+            delegate?.userBecameOffline()
+        }
     }
 }

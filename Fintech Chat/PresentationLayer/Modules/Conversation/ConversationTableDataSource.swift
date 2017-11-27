@@ -17,6 +17,8 @@ protocol ConversationTableDataSourceDelegate: class {
     func beginUpdates() -> Void
     func endUpdates() -> Void
     func prerapeCell(with message: Message, at indexPath: IndexPath) -> UITableViewCell
+    func userBecameOnline()
+    func userBecameOffline()
 }
 
 protocol IConversationTableModel {
@@ -60,20 +62,16 @@ class ConversationTableDataSource: NSObject, IConversationTableDataSource {
 
 extension ConversationTableDataSource: ConversationsServicesDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        print("Object at section: \(String(describing: indexPath?.section)), row: \(String(describing: indexPath?.row)) is going to be")
         switch type {
         case .delete:
-            print("deleted")
             if let indexPath = indexPath {
                 delegate?.deleteRow(at: indexPath)
             }
         case .insert:
-            print("inserted")
             if let newIndexPath = newIndexPath {
                 delegate?.insertRow(at: newIndexPath)
             }
         case .move:
-            print("moved")
             if let indexPath = indexPath {
                 delegate?.deleteRow(at: indexPath)
             }
@@ -81,7 +79,6 @@ extension ConversationTableDataSource: ConversationsServicesDelegate {
                 delegate?.insertRow(at: newIndexPath)
             }
         case .update:
-            print("updated")
             if let indexPath = indexPath {
                 delegate?.updateRow(at: indexPath)
             }
@@ -94,6 +91,16 @@ extension ConversationTableDataSource: ConversationsServicesDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         delegate?.endUpdates()
+    }
+}
+
+extension ConversationTableDataSource: OnlineMonitoringDelegate {
+    func userBecameOnline() {
+        delegate?.userBecameOnline()
+    }
+    
+    func userBecameOffline() {
+        delegate?.userBecameOffline()
     }
 }
 

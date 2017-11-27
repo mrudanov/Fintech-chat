@@ -17,6 +17,8 @@ protocol IConversationsPreviewsService: class {
     func titlerForSection(_ section: Int) -> String?
 }
 
+typealias ConversationsServicesDelegate = NSFetchedResultsControllerDelegate
+
 class ConversationsPreviewsService: IConversationsPreviewsService {
     private let fetchedResultsController: NSFetchedResultsController<User>
     private let storageManager: StorageManager

@@ -10,18 +10,25 @@ import Foundation
 import CoreData
 
 protocol StorageManager: class {
+    weak var delegate: StorageManagerDelegate? { get set }
     func updateUser(userID: String, userName: String?, info: String?, image: Data?, isOnline: Bool, completionHandler: (() -> Void)?)
     func insertMessage(text: String, fromUserID: String, toUserID: String)
     func getAppUserId() -> String
     func getAppUserInfo() -> (name: String?, info: String?, image: Data?)
+    func getUserById(_ : String) -> User?
     func getConversationsPreviewFRC() -> NSFetchedResultsController<User>
     func getConversationWithUserFRC(userId: String) -> NSFetchedResultsController<Message>
     func setAllUsersOffline()
 }
 
+protocol StorageManagerDelegate: class {
+    func didChangeData()
+}
+
 class CoreDataStorageManager: StorageManager {
     
     private let coreDataStack: ICoreDataStack
+    weak var delegate: StorageManagerDelegate?
     
     init(coreDataStack: ICoreDataStack) {
         self.coreDataStack = coreDataStack
@@ -47,7 +54,10 @@ class CoreDataStorageManager: StorageManager {
                     user?.image = image
                 }
                 
-                self?.coreDataStack.performSave(context: mainContext, completionHandler: completionHandler)
+                self?.coreDataStack.performSave(context: mainContext) { [weak self] in
+                    self?.delegate?.didChangeData()
+                    completionHandler?()
+                }
             }
         }
     }
@@ -85,7 +95,9 @@ class CoreDataStorageManager: StorageManager {
                         message?.conversation = conversation
                         message?.lastMessageInConversation = conversation
                         
-                        self?.coreDataStack.performSave(context: mainContext, completionHandler: nil)
+                        self?.coreDataStack.performSave(context: mainContext) { [weak self] in
+                            self?.delegate?.didChangeData()
+                        }
                     }
                 }
             }
@@ -103,7 +115,9 @@ class CoreDataStorageManager: StorageManager {
             userInfo.info = appUser?.currentUser?.info
             userInfo.image = appUser?.currentUser?.image
             
-            self?.coreDataStack.performSave(context: mainContext, completionHandler: nil)
+            self?.coreDataStack.performSave(context: mainContext) { [weak self] in
+                self?.delegate?.didChangeData()
+            }
         }
         return userInfo
     }
@@ -123,6 +137,19 @@ class CoreDataStorageManager: StorageManager {
             self?.coreDataStack.performSave(context: mainContext, completionHandler: nil)
         }
         return id
+    }
+    
+    public func getUserById(_ id: String) -> User? {
+        guard let mainContext = coreDataStack.mainContext else {
+            assert(false, "No save context!")
+        }
+        
+        var user: User?
+        
+        mainContext.performAndWait {
+            user = User.findUser(with: id, in: mainContext)
+        }
+        return user
     }
     
     public func getConversationsPreviewFRC() -> NSFetchedResultsController<User> {
@@ -174,7 +201,9 @@ class CoreDataStorageManager: StorageManager {
                 print("Failed to fetch AppUser: \(error)")
             }
             
-            self?.coreDataStack.performSave(context: mainContext, completionHandler: nil)
+            self?.coreDataStack.performSave(context: mainContext) { [weak self] in
+                self?.delegate?.didChangeData()
+            }
         }
     }
 }

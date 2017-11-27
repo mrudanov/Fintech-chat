@@ -18,12 +18,12 @@ class ConversationAssembly {
         self.communicationManager = communicationManager
     }
     
-    func conversationViewController(userID: String, userName: String) -> ConversationViewController {
+    func conversationViewController(userID: String, userName: String, isOnline: Bool) -> ConversationViewController {
         let service = conversationService(userId: userID, storageManager: storageManager, communicationManager: communicationManager)
         
         let model = conversationsListTableDataSource(userId: userID, service: service)
         
-        let conversationVC = ConversationViewController.initVC(with: model, userID: userID, userName: userName)
+        let conversationVC = ConversationViewController.initVC(with: model, userID: userID, userName: userName, online: isOnline)
         return conversationVC
     }
     

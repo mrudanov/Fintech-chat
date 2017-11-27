@@ -27,13 +27,13 @@ class ConversationsListViewController: UIViewController {
         tableDataSource?.delegate = self
     }
     
-    private func navigateToCoversation(with userID: String, userName: String) {
+    private func navigateToCoversation(with userID: String, userName: String, isOnline: Bool) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         guard appDelegate != nil else { return }
         
         let conversationAssembly = appDelegate!.rootAssembly.conversationModule
         
-        let destinationVC = conversationAssembly.conversationViewController(userID: userID, userName: userName)
+        let destinationVC = conversationAssembly.conversationViewController(userID: userID, userName: userName, isOnline: isOnline)
         
         show(destinationVC, sender: nil)
     }
@@ -54,9 +54,8 @@ extension ConversationsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        let user = tableDataSource?.getUserForRowAt(indexPath: indexPath)
-        if let id = user?.userId {
-            navigateToCoversation(with: id, userName: user?.name ?? "Unknown")
+        if let user = tableDataSource?.getUserForRowAt(indexPath: indexPath), let id = user.userId {
+            navigateToCoversation(with: id, userName: user.name ?? "Unknown", isOnline: user.isOnline)
         }
     }
 }
