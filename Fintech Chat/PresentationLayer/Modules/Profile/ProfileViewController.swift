@@ -14,7 +14,7 @@ struct UIUserInfo {
     var image: UIImage?
 }
 
-class ProfileViewController: GeneratorViwController, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var takePictureButton: RoundedButton!
     @IBOutlet weak var profileImage: RoundedImageView!
@@ -31,6 +31,9 @@ class ProfileViewController: GeneratorViwController, UINavigationControllerDeleg
     
     private var model: IProfileModel?
     
+    private let enabledButtonColor: UIColor = UIColor(red:0.32, green:0.56, blue:0.93, alpha:1.0)
+    private let disabledButtonColor: UIColor = UIColor(red:0.54, green:0.54, blue:0.54, alpha:1.0)
+    
     static func initVC(model: IProfileModel) -> ProfileViewController {
         let profileVC = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "Profile") as! ProfileViewController
         profileVC.model = model
@@ -41,6 +44,7 @@ class ProfileViewController: GeneratorViwController, UINavigationControllerDeleg
         super.viewDidLoad()
         
         saveButton.isEnabled = false
+        saveButton.backgroundColor = disabledButtonColor
         
         // Load saved user data
         loadUserInfo()
@@ -100,6 +104,7 @@ class ProfileViewController: GeneratorViwController, UINavigationControllerDeleg
         currentUserInfo?.info = descriptionTextField.text
         currentUserInfo?.image = profileImage.image
         saveButton.isEnabled = false
+        saveButton.backgroundColor = disabledButtonColor
     }
     
     private func handleSaveReponse() {
@@ -192,6 +197,7 @@ extension ProfileViewController: ImageCollectionViewControllerDelegate {
     func didPickImage(_ image: UIImage?) {
         if let image = image {
             saveButton.isEnabled = true
+            saveButton.backgroundColor = enabledButtonColor
             profileImageChanged = true
             profileImage.image = image
         }
@@ -207,8 +213,10 @@ extension ProfileViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if currentUserInfo?.name == nameTextField.text && currentUserInfo?.info == descriptionTextField.text && !profileImageChanged {
             saveButton.isEnabled = false
+            saveButton.backgroundColor = disabledButtonColor
         } else {
             saveButton.isEnabled = true
+            saveButton.backgroundColor = enabledButtonColor
         }
     }
 }
@@ -218,6 +226,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             profileImage.image = image
             saveButton.isEnabled = true
+            saveButton.backgroundColor = enabledButtonColor
             profileImageChanged = true
         } else {
             print("Image retrieving error")

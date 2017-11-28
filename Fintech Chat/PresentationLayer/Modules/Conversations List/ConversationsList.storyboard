@@ -103,7 +103,7 @@
             <objects>
                 <navigationController storyboardIdentifier="ConversationsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="EFc-q2-sON" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FA7-7J-2bd" customClass="GeneratorNavigationBar" customModule="Fintech_Chat" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FA7-7J-2bd">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -1,5 +1,5 @@
 //
-//  GeneratorUITableView.swift
+//  GeneratorUICollectionView.swift
 //  Fintech Chat
 //
 //  Created by Mikhail Rudanov on 28/11/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GeneratorTableView: UITableView {
+class GeneretorUICollectionVeiw: UICollectionView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.next?.touchesBegan(touches, with: event)

@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		74035F901FCC8CDE005A88D2 /* IconsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F8F1FCC8CDE005A88D2 /* IconsGenerator.swift */; };
-		74035F931FCCDB6F005A88D2 /* GeneratorUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F921FCCDB6F005A88D2 /* GeneratorUIView.swift */; };
-		74035F951FCCDB89005A88D2 /* GeneratorUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F941FCCDB89005A88D2 /* GeneratorUIViewController.swift */; };
-		74035F991FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F981FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift */; };
 		74035F9B1FCCDBDE005A88D2 /* GeneratorUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F9A1FCCDBDE005A88D2 /* GeneratorUITableView.swift */; };
+		74035F9D1FCD4E4B005A88D2 /* GeneratorUICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74035F9C1FCD4E4B005A88D2 /* GeneratorUICollectionView.swift */; };
 		740594C31FB7B392003AA7A6 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740594C21FB7B392003AA7A6 /* Conversation.swift */; };
 		740ADF9D1FBA2FD900AF6DD6 /* CommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740ADF9C1FBA2FD900AF6DD6 /* CommunicationManager.swift */; };
 		740ADF9F1FBA32DA00AF6DD6 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740ADF9E1FBA32DA00AF6DD6 /* StorageManager.swift */; };
@@ -59,10 +57,8 @@
 
 /* Begin PBXFileReference section */
 		74035F8F1FCC8CDE005A88D2 /* IconsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsGenerator.swift; sourceTree = "<group>"; };
-		74035F921FCCDB6F005A88D2 /* GeneratorUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorUIView.swift; sourceTree = "<group>"; };
-		74035F941FCCDB89005A88D2 /* GeneratorUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorUIViewController.swift; sourceTree = "<group>"; };
-		74035F981FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorUINavigationBar.swift; sourceTree = "<group>"; };
 		74035F9A1FCCDBDE005A88D2 /* GeneratorUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorUITableView.swift; sourceTree = "<group>"; };
+		74035F9C1FCD4E4B005A88D2 /* GeneratorUICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorUICollectionView.swift; sourceTree = "<group>"; };
 		740594C21FB7B392003AA7A6 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		740ADF9C1FBA2FD900AF6DD6 /* CommunicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
 		740ADF9E1FBA32DA00AF6DD6 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -125,10 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				74035F8F1FCC8CDE005A88D2 /* IconsGenerator.swift */,
-				74035F921FCCDB6F005A88D2 /* GeneratorUIView.swift */,
-				74035F941FCCDB89005A88D2 /* GeneratorUIViewController.swift */,
-				74035F981FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift */,
 				74035F9A1FCCDBDE005A88D2 /* GeneratorUITableView.swift */,
+				74035F9C1FCD4E4B005A88D2 /* GeneratorUICollectionView.swift */,
 			);
 			path = IconsGenerator;
 			sourceTree = "<group>";
@@ -403,8 +397,6 @@
 				74AB819D1FC2EAE400B68228 /* RequestsFactory.swift in Sources */,
 				740ADF9D1FBA2FD900AF6DD6 /* CommunicationManager.swift in Sources */,
 				74FD99AF1FAFB71300AAE672 /* Storage.xcdatamodeld in Sources */,
-				74035F951FCCDB89005A88D2 /* GeneratorUIViewController.swift in Sources */,
-				74035F931FCCDB6F005A88D2 /* GeneratorUIView.swift in Sources */,
 				74AB819B1FC2E12500B68228 /* Request.swift in Sources */,
 				740ADF9F1FBA32DA00AF6DD6 /* StorageManager.swift in Sources */,
 				745D47671FA7174E00457F70 /* ConversationAssebly.swift in Sources */,
@@ -425,9 +417,9 @@
 				74AB81941FC21ED800B68228 /* ImageCollectionDataModel.swift in Sources */,
 				740594C31FB7B392003AA7A6 /* Conversation.swift in Sources */,
 				74BD17F71F8A307E00783280 /* ConversationTableViewCell.swift in Sources */,
+				74035F9D1FCD4E4B005A88D2 /* GeneratorUICollectionView.swift in Sources */,
 				74FD99B21FB0BB6100AAE672 /* AppUserExtension.swift in Sources */,
 				745A788B1F9B429900C16206 /* MultipeerCommunicator.swift in Sources */,
-				74035F991FCCDBB7005A88D2 /* GeneratorUINavigationBar.swift in Sources */,
 				741B59E21FB7AB3D00EB0D61 /* MessageExtension.swift in Sources */,
 				746E93131FA884BA00C4C7C6 /* ProfileModel.swift in Sources */,
 				74AB81991FC2DEB700B68228 /* RequestSender.swift in Sources */,

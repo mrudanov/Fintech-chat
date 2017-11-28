@@ -25,7 +25,7 @@ class ConversationViewController: UIViewController {
     var isOnline = Bool()
     
     private var textFieldIsEmpty: Bool = true
-    private var sendButtonIsAnimating: Bool = false
+    
     private var tableDataSource: IConversationTableDataSource?
     
     static func initVC(with tableDataSource: IConversationTableDataSource, userID: String, userName: String, online: Bool) -> ConversationViewController {
@@ -43,7 +43,6 @@ class ConversationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupNavigationTitle()
         setupTableView()
         setupTextField()
         setupKeyboardObservers()
@@ -127,21 +126,17 @@ class ConversationViewController: UIViewController {
     }
     
     private func animateSendButton(toColor: UIColor) {
-        if !sendButtonIsAnimating {
-            sendButtonIsAnimating = true
-            UIView.animate(withDuration: 0.5, animations: {
-                self.sendButton.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
-                self.sendButton.backgroundColor = toColor
-            }) { finished in
-                if finished {
-                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { timer in
-                        UIView.animate(withDuration: 0.5) {
-                            self.sendButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                            self.sendButtonIsAnimating = false
-                        }
+        sendButton.layer.removeAllAnimations()
+
+        UIView.animate(withDuration: 0.5, animations: {
+            self.sendButton.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+            self.sendButton.backgroundColor = toColor
+        }) { finished in
+            if finished {
+                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { timer in
+                    UIView.animate(withDuration: 0.5) {
+                        self.sendButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                     }
-                } else {
-                    self.sendButtonIsAnimating = false
                 }
             }
         }
