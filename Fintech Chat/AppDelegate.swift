@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelega
     
     let rootAssembly = RootAssembly()
     
-    let generator = IconsGenerator()
+    let generator: IconGenerator = TinkoffIconsGenerator()
         
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         

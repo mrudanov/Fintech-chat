@@ -9,7 +9,14 @@
 import Foundation
 import UIKit
 
-class IconsGenerator {
+protocol IconGenerator {
+    func setTarget(view : UIView?)
+    func startGenerating(from: CGPoint)
+    func stopGenerating()
+    func setGeneratePosition(_: CGPoint)
+}
+
+class TinkoffIconsGenerator: IconGenerator {
     private let minMove: UInt32 = 30
     private let maxMove: UInt32 = 250
     private let minSize: Int = 30

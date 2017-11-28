@@ -12,7 +12,6 @@ class ConversationsListViewController: UIViewController {
     
     @IBOutlet weak var conversationsListTableView: UITableView!
     private var tableDataSource: IConversationsListTableDataSource?
-    private var generator: IconsGenerator?
     
     static func initVC(with tableDataSource: IConversationsListTableDataSource) -> ConversationsListViewController {
         let conversationVC = UIStoryboard(name: "ConversationsList", bundle: nil).instantiateViewController(withIdentifier: "ConversationsList") as! ConversationsListViewController
