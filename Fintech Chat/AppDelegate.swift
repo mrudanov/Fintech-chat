@@ -9,22 +9,18 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
     let rootAssembly = RootAssembly()
     
-    let generator: IconGenerator = TinkoffIconsGenerator()
-        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = GeneratorUIWindow(frame: UIScreen.main.bounds)
         let mainVC = rootAssembly.conversationsListModule.embededInNavProfileVC()
         window?.rootViewController = mainVC
         window?.makeKeyAndVisible()
-        
-        generator.setTarget(view: window)
         
         return true
     }
@@ -35,27 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIGestureRecognizerDelega
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         rootAssembly.turnOnCommunicator()
-    }
-    
-    // MARK: - Icon generating
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let firstTouch = touches.first {
-            generator.startGenerating(from: firstTouch.location(in: window))
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let firstTouch = touches.first {
-            generator.setGeneratePosition(firstTouch.location(in: window))
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        generator.stopGenerating()
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        generator.stopGenerating()
     }
 }
 

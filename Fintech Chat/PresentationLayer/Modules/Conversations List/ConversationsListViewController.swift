@@ -27,6 +27,20 @@ class ConversationsListViewController: UIViewController {
         tableDataSource?.delegate = self
     }
     
+    
+    
+//    var emitter = CAEmitterLayer()
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        emitter.emitterPosition = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
+//        emitter.emitterShape = kCAEmitterLayerLine
+//        emitter.emitterSize = CGSize(width: 1, height: 1)
+//        emitter.emitterCells = [IconsCAEmitterCell()]
+//        self.view.layer.addSublayer(emitter)
+//    }
+    
+    
+    
     private func navigateToCoversation(with userID: String, userName: String, isOnline: Bool) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         guard appDelegate != nil else { return }
