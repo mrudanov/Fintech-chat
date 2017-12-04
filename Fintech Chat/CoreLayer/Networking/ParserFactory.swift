@@ -10,7 +10,7 @@ import Foundation
 
 typealias Parser<Model> = (Data) -> Model?
 
-class ParserFactory {
+struct ParserFactory {
     static let imageListJSONParser: Parser<ImageListAPIModel> = { data in
         do {
             let jsonDecoder = JSONDecoder()

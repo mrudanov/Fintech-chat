@@ -9,7 +9,6 @@
 import Foundation
 
 struct RequestsFactory {
-    
     struct PixabayRequests {
         static func imagesListRequest() -> RequestConfig<ImageListAPIModel> {
             let request = PixabayRequest(apiKey: "7109883-b07037ae17b8ec5baaa500044", imagesCount: 90)
